@@ -130,6 +130,8 @@ $errorBgColor: rgb(250, 223, 223);
 .radio-list {
   margin: 1rem;
   min-width: 182px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue";
 }
 
 .radio-list-off span {
@@ -143,9 +145,6 @@ $errorBgColor: rgb(250, 223, 223);
 }
 
 .radio-container {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
   margin: 0.5rem 0 0.5rem 0;
   background-color: $bgColorButton;
   border-radius: 5px;
@@ -190,6 +189,27 @@ $errorBgColor: rgb(250, 223, 223);
 
 .radio-infos span:nth-child(3) {
   margin-left: 0.5rem;
+}
+
+.audio-volume {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue";
+    margin-right: 3rem;
+}
+
+.audio-volume span {
+  display: block;
+  padding-bottom: 0.3rem;
+  margin-right: 0.5rem;
+}
+
+.volume {
+  color: orange;
+  margin-right: 0.5rem;
 }
 
 /* Dot pulse */

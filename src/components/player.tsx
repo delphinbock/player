@@ -1,7 +1,11 @@
 import { useRef, useEffect, useState } from "react";
 
 // Fontawesome
-import { faPlay, faStop } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlay,
+  faStop,
+  faVolumeHigh,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // SCSS
@@ -45,6 +49,7 @@ const Player = () => {
     min: "00",
     hour: "00",
   });
+  const [volume, setVolume] = useState<any>(0.5);
 
   // Toggle play or pause state
   const toggle = () => {
@@ -147,6 +152,12 @@ const Player = () => {
     return () => clearInterval(intervalRef.current);
   }, [playing]);
 
+  // Volume change
+  const changeVolume = () => {
+    // Volume
+    audio.current.volume = volume;
+  };
+
   return (
     <>
       <div className="container">
@@ -174,6 +185,22 @@ const Player = () => {
                 backgroundImage: `url(${process.env.REACT_APP_IMG_PATH}${logo})`,
               }}
             ></div>
+          </div>
+          <div className="audio-volume">
+            <span>Volume </span>
+            <input
+              className="volume"
+              type="range"
+              min="0"
+              max="1"
+              value={volume}
+              onChange={(e) => {
+                setVolume(e.target.value);
+                changeVolume();
+              }}
+              step="0.01"
+            />
+            <FontAwesomeIcon icon={faVolumeHigh} />
           </div>
           {error !== "" ? (
             <div className="error">
