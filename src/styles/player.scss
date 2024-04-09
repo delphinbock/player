@@ -1,4 +1,5 @@
-$url: "../../public/fonts/";
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+$url: "https://github.com/delphinbock/player/tree/master/public/fonts/";
 $fontName: "FjallaOne-Regular";
 $bgColorPlayer: #fffaee;
 $borderColor: orange;
@@ -95,6 +96,7 @@ $errorBgColor: rgb(250, 223, 223);
 }
 
 .timer {
+  font-family: "Fjalla One", sans-serif;
   min-width: 150px;
   display: flex;
   flex-direction: row;
@@ -106,7 +108,6 @@ $errorBgColor: rgb(250, 223, 223);
   padding: 1rem 0.5rem 1rem 0.5rem;
   border: 1px solid $borderColor;
   border-radius: 5px;
-  font-family: $fontName;
 }
 
 .timer span {
