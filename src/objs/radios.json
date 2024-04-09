@@ -8,7 +8,7 @@
     "style": ["dance", "oldies", "80s"],
     "url": "http://s1.nexuscast.com:8135/;;audio.mp3",
     "logo": "back-to-80.jpg",
-    "flag": "usa.png"
+    "flag": "NZ-Q-USA.png"
   },
   {
     "id": 1,
@@ -19,7 +19,7 @@
     "style": ["rock", "blue", "country"],
     "url": "https://c5.radioboss.fm:18224/stream",
     "logo": "american-road.jpg",
-    "flag": "usa.png"
+    "flag": "NZ-Q-USA.png"
   },
   {
     "id": 2,
@@ -28,9 +28,9 @@
     "state": "kiev oblast",
     "city": "kiev",
     "style": ["lounge"],
-    "url": "http://cast.loungefm.com.ua/terrace128?1410329080738.mp3",
+    "url": "https://jazzlounge.ice.infomaniak.ch/jazzlounge-high.mp3",
     "logo": "loungefm.jpg",
-    "flag": "ukraine.png"
+    "flag": "Lxmv-ukraine.png"
   },
   {
     "id": 3,
@@ -39,9 +39,9 @@
     "state": "ontario",
     "city": "toronto",
     "style": ["dance", "80s", "oldies"],
-    "url": "https://maggie.torontocast.com:2020/stream/wave-80/stream.mp3",
+    "url": "https://radio.streemlion.com:1235/stream",
     "logo": "wave80.jpg",
-    "flag": "canada.png"
+    "flag": "aBIS-canada.png"
   },
   {
     "id": 4,
@@ -52,6 +52,6 @@
     "style": ["jazz"],
     "url": "https://jking.cdnstream1.com/b22139_128mp3",
     "logo": "101-smooth-jazz.jpg",
-    "flag": "usa.png"
+    "flag": "NZ-Q-USA.png"
   }
 ]

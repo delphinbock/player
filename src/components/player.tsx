@@ -1,42 +1,74 @@
-import { useRef, useEffect, useState } from "react";
+// React
+import { FC, useRef, useEffect, useState, useCallback } from "react";
 
-// Fontawesome
+// Font icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlay,
   faStop,
   faVolumeHigh,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// SCSS
-import "../styles/player.scss";
-
-// Radios obj
+// Obj
 import radioObj from "../../src/objs/radios.json";
 
-const PlayButton = ({ playing }: any) => {
-  return <FontAwesomeIcon icon={!playing ? faPlay : faStop} />;
-};
+// Styles
+import "../styles/player.scss";
 
-const LoadingButton = () => {
-  return (
-    <div className="spinner">
-      <div className="bounce1"></div>
-      <div className="bounce2"></div>
-      <div className="bounce3"></div>
-    </div>
-  );
-};
+// Play button component
+const PlayButton: FC<{ playing: boolean }> = ({ playing }) => (
+  <FontAwesomeIcon icon={!playing ? faPlay : faStop} />
+);
 
-const Player = () => {
-  // Const
+// Loading button component
+const LoadingButton: FC = () => (
+  <div className="spinner">
+    <div className="bounce1"></div>
+    <div className="bounce2"></div>
+    <div className="bounce3"></div>
+  </div>
+);
+
+// RadioList component
+const RadioList: FC<{
+  radioList: boolean;
+  switchRadio: (id: number) => void;
+}> = ({ radioList, switchRadio }) => (
+  <div className={radioList ? "radio-list" : "radio-list radio-list-off"}>
+    {radioObj.map((radio, i) => (
+      <div key={`${i}_${radio.id}`} className="radio-container">
+        <div>
+          <img
+            src={`${process.env.REACT_APP_IMG_PATH}${radio.flag}`}
+            alt="flag"
+          />
+        </div>
+        <div>
+          <button
+            onClick={radioList ? () => switchRadio(radio.id) : undefined}
+            className="radio-name"
+          >
+            {radio.name}
+          </button>
+          <div className="radio-infos">
+            <span>{radio.state}</span>
+            <span> - </span>
+            <span>{radio.city}</span>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
+// Radio player component
+const Player: FC = () => {
+  // Constants
   const errorPlay = "Playing error. The player will be reinitialized";
 
   // References
-  const audio = useRef<HTMLAudioElement>(new Audio(radioObj[2].url));
-
-  // Ref
-  let intervalRef: any = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(new Audio(radioObj[2].url));
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // States
   const [playing, setPlaying] = useState<boolean>(false);
@@ -44,90 +76,101 @@ const Player = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [logo, setLogo] = useState<string>(radioObj[2].logo);
-  const [counter, setCounter] = useState<any>({
+  const [counter, setCounter] = useState<{
+    sec: string;
+    min: string;
+    hour: string;
+  }>({
     sec: "00",
     min: "00",
     hour: "00",
   });
-  const [volume, setVolume] = useState<any>(0.5);
+  const [volume, setVolume] = useState<number>(0.5);
 
   // Toggle play or pause state
-  const toggle = () => {
-    setPlaying(!playing);
-    setRadioList(!radioList);
-  };
+  const toggle = useCallback(() => {
+    setPlaying((prevPlaying) => !prevPlaying);
+    setRadioList((prevRadioList) => !prevRadioList);
+  }, []);
 
   // Switch radio station
-  const switchRadio = (id: number) => {
-    // Set states
-    setLogo(radioObj[id].logo);
-    setRadioList(!radioList);
-    setLoading(true);
+  const switchRadio = useCallback(
+    (id: number) => {
+      // Set states
+      setLogo(radioObj[id].logo);
+      setRadioList(!radioList);
+      setLoading(true);
 
-    // Stop stream
-    audio.current.pause();
+      // Stop stream
+      audioRef.current.pause();
 
-    // Load new stream
-    audio.current = new Audio(radioObj[id].url);
+      // Load new stream
+      audioRef.current = new Audio(radioObj[id].url);
 
-    // Play
-    setPlaying(!playing);
-  };
+      // Play
+      setPlaying((prevPlaying) => !prevPlaying);
+    },
+    [audioRef, radioList]
+  );
+
+  // Define handleAudioError outside the useEffect
+  const handleAudioError = useCallback(() => {
+    // SetState
+    setError(errorPlay);
+
+    // Display message during 5s
+    setTimeout(() => {
+      // Reload page
+      window.location.reload();
+    }, 5000);
+  }, []);
+
+  // Define a function to handle stream error outside the useEffect
+  const handleStreamError = useCallback(() => {
+    if (audioRef.current.currentTime === 0) {
+      handleAudioError();
+    }
+  }, [handleAudioError]);
+
+  // Define a named function outside of the useEffect
+  const handleAudioPlay = useCallback(() => {
+    // Set play state directly with the current value
+    setPlaying((prevPlaying) => prevPlaying);
+
+    // Set loading state
+    setLoading(false);
+
+    // Reinitialize if the stream is not read after a certain time
+    setTimeout(() => handleStreamError(), 10000);
+  }, [handleStreamError]);
 
   // Play effects
   useEffect(() => {
-    // Play or pause from playing state
+    // Play or pause based on the playing state
     if (playing) {
       setTimeout(() => {
-        let promise = audio.current.play();
+        let promise = audioRef.current.play();
 
         // Audio play promise
         if (promise !== null) {
-          promise
-            .then((_) => {
-              // Reinititialze if the stream is not read after a lap of time
-              setTimeout(() => {
-                if (audio.current.currentTime === 0) {
-                  // SetState
-                  setError(errorPlay);
-
-                  // Reload page
-                  setTimeout(() => {
-                    window.location.reload();
-                  }, 3000);
-                }
-              }, 10000);
-
-              // Set play state
-              setPlaying(playing);
-
-              // Set loading state
-              setLoading(false);
-            })
-            .catch((err) => {
-              // SetState
-              setError(errorPlay);
-
-              // Display message during 5s
-              setTimeout(() => {
-                // Reload page
-                window.location.reload();
-              }, 5000);
-            });
+          promise.then(handleAudioPlay).catch(handleAudioError);
         }
       }, 500);
     } else {
-      audio.current.pause();
+      audioRef.current.pause();
     }
-  }, [audio, playing]);
+
+    // Cleanup function for the effect
+    return () => clearInterval(intervalRef.current!);
+  }, [audioRef, playing, handleAudioError, handleAudioPlay]);
 
   // Border effects
   useEffect(() => {
-    // Decrease counter fnct
+    // Decrease counter function
     const increaseDate = () => {
       if (playing) {
         // Format seconds
-        const result = new Date(audio.current.currentTime * 1000)
+        const result = new Date(audioRef.current.currentTime * 1000)
           .toISOString()
           .slice(11, 19);
 
@@ -144,107 +187,73 @@ const Player = () => {
       }
     };
 
-    // Run fnct every seconds
+    // Run function every second
     intervalRef.current = setInterval(() => {
       increaseDate();
     }, 1000);
 
-    return () => clearInterval(intervalRef.current);
+    return () => clearInterval(intervalRef.current!);
   }, [playing]);
 
   // Volume change
   const changeVolume = () => {
     // Volume
-    audio.current.volume = volume;
+    audioRef.current.volume = volume;
   };
 
   return (
-    <>
-      <div className="container">
-        <div id="player">
-          <div className="first">
-            <div className="timer">
-              <span>{counter.hour}</span>
-              <span>:</span>
-              <span>{counter.min}</span>
-              <span>:</span>
-              <span>{counter.sec}</span>
-            </div>
-            {!loading ? (
-              <div className="button" onClick={() => toggle()}>
-                <PlayButton playing={playing} />
-              </div>
-            ) : (
-              <div className="button loading">
-                <LoadingButton />
-              </div>
-            )}
-            <div
-              className="radio"
-              style={{
-                backgroundImage: `url(${process.env.REACT_APP_IMG_PATH}${logo})`,
-              }}
-            ></div>
+    <div className="container">
+      <div id="player">
+        <div className="first">
+          <div className="timer">
+            <span>{counter.hour}</span>
+            <span>:</span>
+            <span>{counter.min}</span>
+            <span>:</span>
+            <span>{counter.sec}</span>
           </div>
-          <div className="audio-volume">
-            <span>Volume </span>
-            <input
-              className="volume"
-              type="range"
-              min="0"
-              max="1"
-              value={volume}
-              onChange={(e) => {
-                setVolume(e.target.value);
-                changeVolume();
-              }}
-              step="0.01"
-            />
-            <FontAwesomeIcon icon={faVolumeHigh} />
-          </div>
-          {error !== "" ? (
-            <div className="error">
-              <span>{error}</span>
+          {!loading ? (
+            <button className="button" onClick={toggle}>
+              <PlayButton playing={playing} />
+            </button>
+          ) : (
+            <div className="button loading">
+              <LoadingButton />
             </div>
-          ) : null}
-          <div className="second">
-            <div
-              className={`${
-                radioList ? "radio-list" : "radio-list radio-list-off"
-              }`}
-            >
-              {radioObj.map((radio, i) => {
-                return (
-                  <div key={i} className="radio-container">
-                    <div>
-                      <img
-                        src={`${process.env.REACT_APP_IMG_PATH}${radio.flag}`}
-                        alt="flag"
-                      />
-                    </div>
-                    <div>
-                      <span
-                        onClick={
-                          radioList ? () => switchRadio(radio.id) : () => null
-                        }
-                        className="radio-name"
-                      >
-                        {radio.name}
-                      </span>
-                      <div className="radio-infos">
-                        <span>{radio.state}</span>
-                        <span> - </span>
-                        <span>{radio.city}</span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+          )}
+          <div
+            className="radio"
+            style={{
+              backgroundImage: `url(${process.env.REACT_APP_IMG_PATH}${logo})`,
+            }}
+          ></div>
+        </div>
+        <div className="audio-volume">
+          <span>Volume </span>
+          <input
+            className="volume"
+            type="range"
+            min="0"
+            max="1"
+            value={volume}
+            onChange={(e) => {
+              setVolume(parseFloat(e.target.value));
+              changeVolume();
+            }}
+            step="0.01"
+          />
+          <FontAwesomeIcon icon={faVolumeHigh} />
+        </div>
+        {error !== "" ? (
+          <div className="error">
+            <span>{error}</span>
           </div>
+        ) : null}
+        <div className="second">
+          <RadioList radioList={radioList} switchRadio={switchRadio} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

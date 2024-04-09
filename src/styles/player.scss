@@ -71,12 +71,12 @@ $errorBgColor: rgb(250, 223, 223);
   cursor: initial !important;
 }
 
-.button svg {
-  margin: 1rem;
+.button svg[data-icon="play"] {
+  padding: 0 0 0 1.1rem;
 }
 
-.button svg[data-icon="play"] {
-  margin: 1rem 1rem 1rem 1.5rem;
+.button svg[data-icon="stop"] {
+  padding: 0 0 0 0.95rem;
 }
 
 .button:hover {
@@ -106,6 +106,7 @@ $errorBgColor: rgb(250, 223, 223);
   padding: 1rem 0.5rem 1rem 0.5rem;
   border: 1px solid $borderColor;
   border-radius: 5px;
+  font-family: $fontName;
 }
 
 .timer span {
@@ -167,6 +168,11 @@ $errorBgColor: rgb(250, 223, 223);
   font-weight: 600;
   margin: 0;
   color: $colorButton;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  text-transform: capitalize;
 }
 
 .radio-name span {
@@ -240,7 +246,7 @@ input[type="range"]::-webkit-slider-thumb {
   margin-top: -12px; /* Centers thumb on the track */
 
   /*custom styles*/
-  background-color:  $colorButton;
+  background-color: $colorButton;
   height: 2rem;
   width: 1rem;
 }
