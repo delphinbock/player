@@ -15,6 +15,9 @@ import radioObj from "../../src/objs/radios.json";
 // Styles
 import "../styles/player.scss";
 
+// Constants
+const { REACT_APP_IMG_PATH } = process.env
+
 // Play button component
 const PlayButton: FC<{ playing: boolean }> = ({ playing }) => (
   <FontAwesomeIcon icon={!playing ? faPlay : faStop} />
@@ -39,7 +42,7 @@ const RadioList: FC<{
       <div key={`${i}_${radio.id}`} className="radio-container">
         <div>
           <img
-            src={`${process.env.REACT_APP_IMG_PATH}${radio.flag}`}
+            src={`${REACT_APP_IMG_PATH}${radio.flag}`}
             alt="flag"
           />
         </div>
@@ -224,7 +227,7 @@ const Player: FC = () => {
           <div
             className="radio"
             style={{
-              backgroundImage: `url(${process.env.REACT_APP_IMG_PATH}${logo})`,
+              backgroundImage: `url(${REACT_APP_IMG_PATH}${logo})`,
             }}
           ></div>
         </div>
@@ -249,7 +252,7 @@ const Player: FC = () => {
             <span>{error}</span>
           </div>
         ) : null}
-        <div className="second">
+        <div>
           <RadioList radioList={radioList} switchRadio={switchRadio} />
         </div>
       </div>
