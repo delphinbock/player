@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 // Obj
-import radioObj from "../../src/objs/radios.json";
+import radioObj from "../../objs/radios.json";
 
 // Styles
 import "../styles/player.scss";

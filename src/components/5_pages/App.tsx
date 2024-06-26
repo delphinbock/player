@@ -1,7 +1,5 @@
-import React from "react";
-
 // Components
-import Player from "./components/player";
+import Player from "/player";
 
 // SASS
 import "./App.scss";

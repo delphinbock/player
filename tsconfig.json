@@ -1,26 +1,39 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ES2020",
+    "skipLibCheck": true,
     "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@base/*": ["src/components/0_base/*"],
+      "@atoms/*": ["src/components/1_atoms/*"],
+      "@molecules/*": ["src/components/2_molecules/*"],
+      "@organisms/*": ["src/components/3_organisms/*"],
+      "@templates/*": ["src/components/4_templates/*"],
+      "@pages/*": ["src/components/5_pages/*"],
+      "@objs/*": ["src/objs/*"],
+      "@redux/*": ["src/redux/*"],
+      "@libs/*": ["src/libs/*"],
+      "@typage/*": ["src/types/*"]
+    },
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src", "tests", "jest.setup.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "typeRoots": ["node_modules/@types"]
 }
