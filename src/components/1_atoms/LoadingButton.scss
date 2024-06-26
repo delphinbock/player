@@ -1,0 +1,35 @@
+// Dot pulse
+.spinnerWrap {
+  margin: 0 0 13px 5px;
+  width: 64px;
+  text-align: center;
+
+  &_bounce1 {
+    //animation-delay: -0.32s;
+    width: 18px;
+    height: 18px;
+    background-color: $colorButton;
+    border-radius: 100%;
+    display: inline-block;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
+
+  &_bounce2 {
+    //animation-delay: -0.16s;
+    width: 18px;
+    height: 18px;
+    background-color: $colorButton;
+    border-radius: 100%;
+    display: inline-block;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
+
+  &_bounce3 {
+    width: 18px;
+    height: 18px;
+    background-color: $colorButton;
+    border-radius: 100%;
+    display: inline-block;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
+}

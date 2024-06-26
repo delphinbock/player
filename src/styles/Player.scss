@@ -112,33 +112,7 @@ $errorBgColor: rgb(250, 223, 223);
           cursor: pointer;
         }
 
-        /* Dot pulse */
-        .spinner {
-          margin: 0 0 13px 5px;
-          width: 64px;
-          text-align: center;
-
-          div {
-            width: 18px;
-            height: 18px;
-            background-color: $colorButton;
-
-            border-radius: 100%;
-            display: inline-block;
-            -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-            animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-          }
-
-          .bounce1 {
-            -webkit-animation-delay: -0.32s;
-            animation-delay: -0.32s;
-          }
-
-          .bounce2 {
-            -webkit-animation-delay: -0.16s;
-            animation-delay: -0.16s;
-          }
-        }
+        
       }
 
       .radio {

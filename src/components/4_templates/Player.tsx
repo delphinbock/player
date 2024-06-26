@@ -1,6 +1,9 @@
 // React
 import { FC, useRef, useEffect, useState, useCallback } from "react";
 
+// Components
+import LoadingButton from "@atoms/LoadingButton";
+
 // Font icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,20 +19,11 @@ import radioObj from "../../objs/radios.json";
 import "../styles/player.scss";
 
 // Constants
-const { REACT_APP_IMG_PATH } = process.env
+const { REACT_APP_IMG_PATH } = process.env;
 
 // Play button component
 const PlayButton: FC<{ playing: boolean }> = ({ playing }) => (
   <FontAwesomeIcon icon={!playing ? faPlay : faStop} />
-);
-
-// Loading button component
-const LoadingButton: FC = () => (
-  <div className="spinner">
-    <div className="bounce1"></div>
-    <div className="bounce2"></div>
-    <div className="bounce3"></div>
-  </div>
 );
 
 // RadioList component
@@ -41,10 +35,7 @@ const RadioList: FC<{
     {radioObj.map((radio, i) => (
       <div key={`${i}_${radio.id}`} className="radio-container">
         <div>
-          <img
-            src={`${REACT_APP_IMG_PATH}${radio.flag}`}
-            alt="flag"
-          />
+          <img src={`${REACT_APP_IMG_PATH}${radio.flag}`} alt="flag" />
         </div>
         <div>
           <button
@@ -152,7 +143,7 @@ const Player: FC = () => {
     // Play or pause based on the playing state
     if (playing) {
       setTimeout(() => {
-        let promise = audioRef.current.play();
+        const promise = audioRef.current.play();
 
         // Audio play promise
         if (promise !== null) {
@@ -178,10 +169,10 @@ const Player: FC = () => {
           .slice(11, 19);
 
         // Split
-        let split = result.split(":");
+        const split = result.split(":");
 
         // Object
-        let obj = { sec: split[2], min: split[1], hour: split[0] };
+        const obj = { sec: split[2], min: split[1], hour: split[0] };
 
         // Set state counter
         setCounter(obj);

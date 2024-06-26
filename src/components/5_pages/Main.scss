@@ -1,13 +1,22 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+// Base
+@import "@base/_base";
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
+// Atoms components
+@import "@atoms/LoadingButton";
+
+// Molecules components
+// @import "@molecules/Fireworks";
+// @import "@molecules/Rules";
+// @import "@molecules/Score";
+// @import "@molecules/Title";
+
+// Organisms components
+// @import "@organisms/Itemspick";
+// @import "@organisms/Windashboard";
+// @import "@organisms/Winwrap";
+
+// Templates
+// @import "@templates/Game";
+
+// Pages
+@import "@pages/App";
