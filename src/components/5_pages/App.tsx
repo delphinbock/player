@@ -1,15 +1,12 @@
 // Components
-import Player from "/player";
-
-// SASS
-import "./App.scss";
+import Player from '@templates/Player'
 
 const App = () => {
   return (
-    <div id="root" className="App">
+    <div id="root">
       <Player />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

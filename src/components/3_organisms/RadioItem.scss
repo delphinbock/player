@@ -1,0 +1,12 @@
+.radioItemWrapper {
+  margin: 0.5rem 0 0.5rem 0;
+  background-color: $bgColorButton;
+  border-radius: 5px;
+  border: 1px solid $borderColor;
+  padding: 0.5rem;
+  text-transform: capitalize;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}

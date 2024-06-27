@@ -1,133 +1,122 @@
 // React
-import { FC, useRef, useEffect, useState, useCallback } from "react";
+import { FC, useRef, useEffect, useState, useCallback } from 'react'
 
 // Components
-import LoadingButton from "@atoms/LoadingButton";
+import RadioList from '@organisms/RadiosList'
+import PlayControl from '@molecules/PlayControl'
+import VolumeControl from '@molecules/VolumeControl'
+import Timer from '@molecules/Timer'
+import RadioLogo from '@atoms/RadioLogo'
+import ErrorDisplay from '@/components/1_atoms/ErrorDisplay'
 
-// Font icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPlay,
-  faStop,
-  faVolumeHigh,
-} from "@fortawesome/free-solid-svg-icons";
+// Obj
+import radioObj from '@objs/radios.json'
 
-
-
-// Styles
-import "../styles/player.scss";
-
-
-
-// Play button component
-const PlayButton: FC<{ playing: boolean }> = ({ playing }) => (
-  <FontAwesomeIcon icon={!playing ? faPlay : faStop} />
-);
-
-
+// Constants
+const { VITE_IMG_PATH } = import.meta.env
 
 // Radio player component
 const Player: FC = () => {
   // Constants
-  const errorPlay = "Playing error. The player will be reinitialized";
+  const errorPlay = 'Playing error. The player will be reinitialized'
 
   // References
-  const audioRef = useRef<HTMLAudioElement>(new Audio(radioObj[2].url));
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const audioRef = useRef<HTMLAudioElement>(new Audio(radioObj[2].url))
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
   // States
-  const [playing, setPlaying] = useState<boolean>(false);
-  const [radioList, setRadioList] = useState<boolean>(true);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
-  const [logo, setLogo] = useState<string>(radioObj[2].logo);
+  const [playing, setPlaying] = useState<boolean>(false)
+  const [radioList, setRadioList] = useState<boolean>(true)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string>('')
+  const [logo, setLogo] = useState<string>(radioObj[2].logo)
   const [counter, setCounter] = useState<{
-    sec: string;
-    min: string;
-    hour: string;
+    sec: string
+    min: string
+    hour: string
   }>({
-    sec: "00",
-    min: "00",
-    hour: "00",
-  });
-  const [volume, setVolume] = useState<number>(0.5);
+    sec: '00',
+    min: '00',
+    hour: '00',
+  })
+  const [volume, setVolume] = useState<number>(0.5)
 
   // Toggle play or pause state
   const toggle = useCallback(() => {
-    setPlaying((prevPlaying) => !prevPlaying);
-    setRadioList((prevRadioList) => !prevRadioList);
-  }, []);
+    setPlaying((prevPlaying) => !prevPlaying)
+    setRadioList((prevRadioList) => !prevRadioList)
+  }, [])
 
   // Switch radio station
   const switchRadio = useCallback(
     (id: number) => {
       // Set states
-      setLogo(radioObj[id].logo);
-      setRadioList(!radioList);
-      setLoading(true);
+      setLogo(radioObj[id].logo)
+      setRadioList(!radioList)
+      setLoading(true)
 
       // Stop stream
-      audioRef.current.pause();
+      audioRef.current.pause()
 
       // Load new stream
-      audioRef.current = new Audio(radioObj[id].url);
+      audioRef.current = new Audio(radioObj[id].url)
 
       // Play
-      setPlaying((prevPlaying) => !prevPlaying);
+      setPlaying((prevPlaying) => !prevPlaying)
     },
     [audioRef, radioList]
-  );
+  )
 
   // Define handleAudioError outside the useEffect
   const handleAudioError = useCallback(() => {
     // SetState
-    setError(errorPlay);
+    setError(errorPlay)
 
     // Display message during 5s
     setTimeout(() => {
       // Reload page
-      window.location.reload();
-    }, 5000);
-  }, []);
+      window.location.reload()
+    }, 5000)
+  }, [])
 
   // Define a function to handle stream error outside the useEffect
   const handleStreamError = useCallback(() => {
     if (audioRef.current.currentTime === 0) {
-      handleAudioError();
+      handleAudioError()
     }
-  }, [handleAudioError]);
+  }, [handleAudioError])
 
   // Define a named function outside of the useEffect
   const handleAudioPlay = useCallback(() => {
     // Set play state directly with the current value
-    setPlaying((prevPlaying) => prevPlaying);
+    setPlaying((prevPlaying) => prevPlaying)
 
     // Set loading state
-    setLoading(false);
+    setLoading(false)
 
     // Reinitialize if the stream is not read after a certain time
-    setTimeout(() => handleStreamError(), 10000);
-  }, [handleStreamError]);
+    setTimeout(() => handleStreamError(), 10000)
+  }, [handleStreamError])
 
   // Play effects
   useEffect(() => {
     // Play or pause based on the playing state
     if (playing) {
       setTimeout(() => {
-        const promise = audioRef.current.play();
+        let promise = audioRef.current.play()
 
         // Audio play promise
         if (promise !== null) {
-          promise.then(handleAudioPlay).catch(handleAudioError);
+          promise.then(handleAudioPlay).catch(handleAudioError)
         }
-      }, 500);
+      }, 500)
     } else {
-      audioRef.current.pause();
+      audioRef.current.pause()
     }
 
     // Cleanup function for the effect
-    return () => clearInterval(intervalRef.current!);
-  }, [audioRef, playing, handleAudioError, handleAudioPlay]);
+    return () => clearInterval(intervalRef.current!)
+  }, [audioRef, playing, handleAudioError, handleAudioPlay])
 
   // Border effects
   useEffect(() => {
@@ -135,91 +124,52 @@ const Player: FC = () => {
     const increaseDate = () => {
       if (playing) {
         // Format seconds
-        const result = new Date(audioRef.current.currentTime * 1000)
-          .toISOString()
-          .slice(11, 19);
+        const result = new Date(audioRef.current.currentTime * 1000).toISOString().slice(11, 19)
 
         // Split
-        const split = result.split(":");
+        let split = result.split(':')
 
         // Object
-        const obj = { sec: split[2], min: split[1], hour: split[0] };
+        let obj = { sec: split[2], min: split[1], hour: split[0] }
 
         // Set state counter
-        setCounter(obj);
+        setCounter(obj)
 
-        return obj;
+        return obj
       }
-    };
+    }
 
     // Run function every second
     intervalRef.current = setInterval(() => {
-      increaseDate();
-    }, 1000);
+      increaseDate()
+    }, 1000)
 
-    return () => clearInterval(intervalRef.current!);
-  }, [playing]);
+    return () => clearInterval(intervalRef.current!)
+  }, [playing])
 
   // Volume change
-  const changeVolume = () => {
-    // Volume
-    audioRef.current.volume = volume;
-  };
+  const changeVolume = (newVolume: number) => {
+    // Set state
+    setVolume(newVolume)
+
+    // Up reference
+    audioRef.current.volume = newVolume
+  }
 
   return (
     <div className="container">
       <div id="player">
-        <div className="first">
-          <div className="timer">
-            <span>{counter.hour}</span>
-            <span>:</span>
-            <span>{counter.min}</span>
-            <span>:</span>
-            <span>{counter.sec}</span>
-          </div>
-          {!loading ? (
-            <button className="button" onClick={toggle}>
-              <PlayButton playing={playing} />
-            </button>
-          ) : (
-            <div className="button loading">
-              <LoadingButton />
-            </div>
-          )}
-          <div
-            className="radio"
-            style={{
-              backgroundImage: `url(${REACT_APP_IMG_PATH}${logo})`,
-            }}
-          ></div>
+        <div className="controllers">
+          <Timer counter={counter} />
+          <PlayControl playing={playing} toggle={toggle} loading={loading} />
+          <RadioLogo logo={logo} imgPath={VITE_IMG_PATH} />
         </div>
-        <div className="audio-volume">
-          <span>Volume </span>
-          <input
-            className="volume"
-            type="range"
-            min="0"
-            max="1"
-            value={volume}
-            onChange={(e) => {
-              setVolume(parseFloat(e.target.value));
-              changeVolume();
-            }}
-            step="0.01"
-          />
-          <FontAwesomeIcon icon={faVolumeHigh} />
-        </div>
-        {error !== "" ? (
-          <div className="error">
-            <span>{error}</span>
-          </div>
-        ) : null}
-        <div>
-          <RadioList radioList={radioList} switchRadio={switchRadio} />
-        </div>
+        <VolumeControl volume={volume} onChangeVolume={changeVolume} />
+        <ErrorDisplay error={error} />
+        <RadioList radioList={radioList} switchRadio={switchRadio} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Player;
+export default Player

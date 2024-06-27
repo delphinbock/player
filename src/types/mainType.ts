@@ -2,11 +2,6 @@
 import { FC } from 'react'
 
 // Radio flag
-type RadioFlagData = {
-  id: number
-  flag: string
-}
-
 type RadioFlagProps = {
   flag: string
 }
@@ -14,27 +9,19 @@ type RadioFlagProps = {
 type RadioFlagType = FC<RadioFlagProps>
 
 // Radio infos
-type RadioInfosData = {
-  id: number
-  name: string
-  flag: string
-  state: string
-  city: string
-}
-
 type RadioInfosProps = {
+  id: number
   name: string
   state: string
   city: string
-  id: number
   radioList: boolean
   switchRadio: (id: number) => void
 }
 
 type RadioInfosType = FC<RadioInfosProps>
 
-// Radio list
-type RadioListData = {
+// Radio item
+type RadioItemData = {
   id: number
   name: string
   flag: string
@@ -42,6 +29,16 @@ type RadioListData = {
   city: string
 }
 
+type RadioItemProps = {
+  id: number
+  radioList: boolean
+  radio: RadioItemData
+  switchRadio: (id: number) => void
+}
+
+type RadioItemType = FC<RadioItemProps>
+
+// Radio list
 type RadioListProps = {
   radioList: boolean
   switchRadio: (id: number) => void
@@ -49,14 +46,71 @@ type RadioListProps = {
 
 type RadioListType = FC<RadioListProps>
 
+// Play button
+type PlayButtonProps = {
+  playing: boolean
+  onClick: () => void
+}
+
+type PlayButtonType = FC<PlayButtonProps>
+
+// Play control
+type PlayControlProps = {
+  playing: boolean
+  toggle: () => void
+  loading: boolean
+}
+
+type PlayControlType = FC<PlayControlProps>
+
+// Volume control
+type VolumeControlProps = {
+  volume: number
+  onChangeVolume: (volume: number) => void
+}
+
+type VolumeControlType = FC<VolumeControlProps>
+
+// Timer
+type TimerProps = {
+  counter: {
+    sec: string
+    min: string
+    hour: string
+  }
+}
+
+type TimerType = FC<TimerProps>
+
+// Timer
+type RadioLogoProps = {
+  logo: string
+  imgPath: string
+}
+
+type RadioLogoType = FC<RadioLogoProps>
+
+// Errors
+type ErrorProps = {
+  error: string
+}
+
+type ErrorType = FC<ErrorProps>
+
 export type {
-  RadioListData,
   RadioListProps,
   RadioListType,
-  RadioFlagData,
   RadioFlagProps,
   RadioFlagType,
-  RadioInfosData,
   RadioInfosProps,
   RadioInfosType,
+  RadioItemData,
+  RadioItemProps,
+  RadioItemType,
+  PlayButtonType,
+  PlayControlType,
+  VolumeControlType,
+  TimerType,
+  RadioLogoType,
+  ErrorType,
 }

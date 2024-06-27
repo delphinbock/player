@@ -2,7 +2,6 @@
 dist/
 
 # Ignorer les fichiers de configuration ESLint
-.eslintrc.cjs
 .eslintrc.config.ts
 
 # Ignorer le dossier node_modules

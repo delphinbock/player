@@ -1,0 +1,35 @@
+.radioItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+
+  &_radioName {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    color: $colorButton;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    text-transform: capitalize;
+  }
+
+  &_radioInfos {
+    cursor: pointer;
+    text-align: left;
+
+    &_radioState {
+      display: block;
+      margin: 0;
+    }
+
+    &_separator {
+      margin: 0.5rem 0 0 0;
+    }
+
+    &_radioCity {
+      margin: 0.5rem 0 0 0;
+    }
+  }
+}

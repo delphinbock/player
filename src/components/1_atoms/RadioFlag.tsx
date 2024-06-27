@@ -6,8 +6,8 @@ import { RadioFlagType } from '@typage/mainType'
 
 // RadioFlag component
 const RadioFlag: RadioFlagType = ({ flag }) => (
-  <div>
-    <img src={`${VITE_IMG_PATH}${flag}`} alt={`flag_${flag}`} loading='lazy' />
+  <div className="radioFlag">
+    <img src={`${VITE_IMG_PATH}${flag}`} alt={`flag_${flag}`} loading="lazy" />
   </div>
 )
 

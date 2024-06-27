@@ -1,0 +1,27 @@
+.playButton {
+  border: 1px solid $colorButton;
+  color: $colorButton;
+  border-radius: 100%;
+  margin: 1rem;
+  background-color: $bgColorButton;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 2.5rem;
+  min-height: 74px;
+  min-width: 74px;
+
+  svg[data-icon='play'] {
+    padding: 0 0 0 1.1rem;
+  }
+
+  svg[data-icon='stop'] {
+    padding: 0 0 0 0.95rem;
+  }
+
+  &:hover {
+    background-color: $bgColorButtonHover;
+    color: $colorButtonHover;
+    cursor: pointer;
+  }
+}
