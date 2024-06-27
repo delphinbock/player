@@ -12,48 +12,19 @@ import {
   faVolumeHigh,
 } from "@fortawesome/free-solid-svg-icons";
 
-// Obj
-import radioObj from "../../objs/radios.json";
+
 
 // Styles
 import "../styles/player.scss";
 
-// Constants
-const { REACT_APP_IMG_PATH } = process.env;
+
 
 // Play button component
 const PlayButton: FC<{ playing: boolean }> = ({ playing }) => (
   <FontAwesomeIcon icon={!playing ? faPlay : faStop} />
 );
 
-// RadioList component
-const RadioList: FC<{
-  radioList: boolean;
-  switchRadio: (id: number) => void;
-}> = ({ radioList, switchRadio }) => (
-  <div className={radioList ? "radio-list" : "radio-list radio-list-off"}>
-    {radioObj.map((radio, i) => (
-      <div key={`${i}_${radio.id}`} className="radio-container">
-        <div>
-          <img src={`${REACT_APP_IMG_PATH}${radio.flag}`} alt="flag" />
-        </div>
-        <div>
-          <button
-            onClick={radioList ? () => switchRadio(radio.id) : undefined}
-            className="radio-name"
-          >
-            {radio.name}
-          </button>
-          <div className="radio-infos">
-            <span>{radio.state}</span>
-            <span> - </span>
-            <span>{radio.city}</span>
-          </div>
-        </div>
-      </div>
-    ))}
-  </div>
-);
+
 
 // Radio player component
 const Player: FC = () => {

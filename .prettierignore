@@ -1,1 +1,12 @@
-./dist
+# Ignorer le dossier de distribution
+dist/
+
+# Ignorer les fichiers de configuration ESLint
+.eslintrc.cjs
+.eslintrc.config.ts
+
+# Ignorer le dossier node_modules
+node_modules/
+
+# Ignorer les fichiers de build
+build/
