@@ -4,6 +4,7 @@ import { FC } from 'react'
 // Radio flag
 type RadioFlagProps = {
   flag: string
+  imgPath: string
 }
 
 type RadioFlagType = FC<RadioFlagProps>
@@ -97,6 +98,28 @@ type ErrorProps = {
 
 type ErrorType = FC<ErrorProps>
 
+// Radio header
+type RadioHeaderProps = {
+  playing: boolean
+  toggle: () => void
+  loading: boolean
+  volume: number
+  changeVolume: (newVolume: number) => void
+  error: string
+  counter: { sec: string; min: string; hour: string }
+  logo: string
+}
+
+type RadioHeaderType = FC<RadioHeaderProps>
+
+// Load image
+type LoadImageProps = {
+  nameStr: string
+  imgPath: string
+}
+
+type LoadImageType = (props: LoadImageProps) => Promise<string>;
+
 export type {
   RadioListProps,
   RadioListType,
@@ -113,4 +136,6 @@ export type {
   TimerType,
   RadioLogoType,
   ErrorType,
+  LoadImageType,
+  RadioHeaderType,
 }

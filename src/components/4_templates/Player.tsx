@@ -3,17 +3,10 @@ import { FC, useRef, useEffect, useState, useCallback } from 'react'
 
 // Components
 import RadioList from '@organisms/RadiosList'
-import PlayControl from '@molecules/PlayControl'
-import VolumeControl from '@molecules/VolumeControl'
-import Timer from '@molecules/Timer'
-import RadioLogo from '@atoms/RadioLogo'
-import ErrorDisplay from '@/components/1_atoms/ErrorDisplay'
+import RadioHeader from '@organisms/RadioHeader'
 
 // Obj
 import radioObj from '@objs/radios.json'
-
-// Constants
-const { VITE_IMG_PATH } = import.meta.env
 
 // Radio player component
 const Player: FC = () => {
@@ -147,6 +140,17 @@ const Player: FC = () => {
     return () => clearInterval(intervalRef.current!)
   }, [playing])
 
+  // Theme
+  useEffect(() => {
+    // Ajouter la classe au body
+    document.body.classList.add('dark')
+
+    // Nettoyage : retirer la classe au démontage du composant
+    return () => {
+      document.body.classList.remove('dark')
+    }
+  }, [])
+
   // Volume change
   const changeVolume = (newVolume: number) => {
     // Set state
@@ -157,17 +161,18 @@ const Player: FC = () => {
   }
 
   return (
-    <div className="container">
-      <div id="player">
-        <div className="controllers">
-          <Timer counter={counter} />
-          <PlayControl playing={playing} toggle={toggle} loading={loading} />
-          <RadioLogo logo={logo} imgPath={VITE_IMG_PATH} />
-        </div>
-        <VolumeControl volume={volume} onChangeVolume={changeVolume} />
-        <ErrorDisplay error={error} />
-        <RadioList radioList={radioList} switchRadio={switchRadio} />
-      </div>
+    <div id="player" className={playing ? 'borderAnimationColor' : ''}>
+      <RadioHeader
+        playing={playing}
+        toggle={toggle}
+        loading={loading}
+        volume={volume}
+        changeVolume={changeVolume}
+        error={error}
+        counter={counter}
+        logo={logo}
+      />
+      <RadioList radioList={radioList} switchRadio={switchRadio} />
     </div>
   )
 }

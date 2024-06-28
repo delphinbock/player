@@ -8,9 +8,9 @@ const RadioInfos: RadioInfosType = ({ id, name, state, city, radioList, switchRa
       {name}
     </button>
     <div className="radioItem_radioInfos">
-      <span className="radioItem_radioInfos_radioState">{state}</span>
-      <span className="radioItem_radioInfos_separator"> - </span>
-      <span className="radioItem_radioInfos_radioCity">{city}</span>
+      <span>{state}</span>
+      <span> - </span>
+      <span>{city}</span>
     </div>
   </div>
 )

@@ -1,7 +1,7 @@
 .radioItem {
   display: flex;
-  flex-direction: row;
-  justify-content: left;
+  flex-direction: column;
+  justify-content: space-between;
 
   &_radioName {
     font-size: 1rem;
@@ -13,23 +13,14 @@
     padding: 0;
     cursor: pointer;
     text-transform: capitalize;
+    text-align: left;
   }
 
   &_radioInfos {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
     cursor: pointer;
-    text-align: left;
-
-    &_radioState {
-      display: block;
-      margin: 0;
-    }
-
-    &_separator {
-      margin: 0.5rem 0 0 0;
-    }
-
-    &_radioCity {
-      margin: 0.5rem 0 0 0;
-    }
   }
 }
