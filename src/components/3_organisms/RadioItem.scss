@@ -1,12 +1,25 @@
 .radioItemWrapper {
+  width: 100%;
   margin: 0.5rem 0 0.5rem 0;
   background-color: $bgColorButton;
   border-radius: 5px;
-  border: 1px solid $borderColor;
+  border: 1px solid $radioItemborderColor;
   padding: 0.5rem;
   text-transform: capitalize;
   display: flex;
   flex-direction: row;
   justify-content: left;
   align-items: center;
+  cursor: pointer;
+  font-family: sans-serif;
+
+  &:hover {
+    background-color: rgb(240, 240, 240);
+    border: 1px solid #f26600;
+
+    .radioItem_radioName,
+    .radioItem_radioInfos {
+      color: #f26600;
+    }
+  }
 }

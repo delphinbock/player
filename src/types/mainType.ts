@@ -11,12 +11,9 @@ type RadioFlagType = FC<RadioFlagProps>
 
 // Radio infos
 type RadioInfosProps = {
-  id: number
   name: string
   state: string
   city: string
-  radioList: boolean
-  switchRadio: (id: number) => void
 }
 
 type RadioInfosType = FC<RadioInfosProps>
@@ -31,7 +28,6 @@ type RadioItemData = {
 }
 
 type RadioItemProps = {
-  id: number
   radioList: boolean
   radio: RadioItemData
   switchRadio: (id: number) => void

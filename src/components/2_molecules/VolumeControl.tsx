@@ -1,6 +1,6 @@
 // Font icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faVolumeHigh } from '@fortawesome/free-solid-svg-icons'
+import { faVolumeHigh, faVolumeXmark } from '@fortawesome/free-solid-svg-icons'
 
 // Types
 import { VolumeControlType } from '@typage/mainType'
@@ -19,7 +19,7 @@ const VolumeControl: VolumeControlType = ({ volume, onChangeVolume }) => (
       }}
       step="0.01"
     />
-    <FontAwesomeIcon icon={faVolumeHigh} />
+    <FontAwesomeIcon icon={volume > 0 ? faVolumeHigh : faVolumeXmark} />
   </div>
 )
 

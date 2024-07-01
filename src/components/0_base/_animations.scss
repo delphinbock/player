@@ -35,3 +35,10 @@
     background-position: 0 0;
   }
 }
+
+// Button play pulse border
+@keyframes pulse {
+  to {
+    box-shadow: 0 0 0 20px rgba(232, 76, 61, 0);
+  }
+}

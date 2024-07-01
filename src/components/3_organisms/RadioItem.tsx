@@ -10,10 +10,10 @@ const { VITE_IMG_PATH } = import.meta.env
 
 // RadioItem component
 const RadioItem: RadioItemType = ({ radio, radioList, switchRadio }) => (
-  <div className="radioItemWrapper">
+  <button className="radioItemWrapper" onClick={radioList ? () => switchRadio(radio.id) : undefined}>
     <RadioFlag flag={radio.flag} imgPath={VITE_IMG_PATH} />
-    <RadioInfos id={radio.id} name={radio.name} state={radio.state} city={radio.city} radioList={radioList} switchRadio={switchRadio} />{' '}
-  </div>
+    <RadioInfos name={radio.name} state={radio.state} city={radio.city} />{' '}
+  </button>
 )
 
 export default RadioItem

@@ -1,4 +1,3 @@
-$fontName: 'FjallaOne-Regular';
 $bgColorPlayer: #fffaee;
 $borderColor: orange;
 $colorButton: #f26600;
@@ -7,6 +6,12 @@ $colorButtonHover: white;
 $bgColorButtonHover: #f26600;
 $errorColor: rgb(223, 1, 1);
 $errorBgColor: rgb(250, 223, 223);
+
+// Volume range
+$radioVolumeRange: rgba(255, 209, 124, 0.658);
+
+// Radio Item
+$radioItemborderColor: #bdbdbd;
 
 // Theme light or night
 $bodyDataFirstBgColorMdBlack: black;
