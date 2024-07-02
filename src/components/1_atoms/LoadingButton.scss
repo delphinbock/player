@@ -1,9 +1,9 @@
 // Dot pulse
 .spinner {
   border-radius: 100%;
-  margin: 1rem;
-  border: 1px solid $colorButton;
-  background-color: $bgColorButton;
+  margin: toRem(16);
+  border: 1px solid $playLoadingButtonColor;
+  background: $playLoadingButtonBgColor;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -14,7 +14,7 @@
   &_bounce1 {
     width: 18px;
     height: 18px;
-    background-color: $colorButton;
+    background: $playLoadingButtonColor;
     border-radius: 100%;
     display: inline-block;
     animation: sk-bouncedelay 1.4s infinite ease-in-out both;
@@ -24,7 +24,7 @@
   &_bounce2 {
     width: 18px;
     height: 18px;
-    background-color: $colorButton;
+    background: $playLoadingButtonColor;
     border-radius: 100%;
     display: inline-block;
     animation: sk-bouncedelay 1.4s infinite ease-in-out both;
@@ -34,7 +34,7 @@
   &_bounce3 {
     width: 18px;
     height: 18px;
-    background-color: $colorButton;
+    background: $playLoadingButtonColor;
     border-radius: 100%;
     display: inline-block;
     animation: sk-bouncedelay 1.4s infinite ease-in-out both;

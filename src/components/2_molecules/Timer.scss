@@ -4,11 +4,11 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
-  color: $colorButton;
-  background-color: $bgColorButton;
-  padding: 1rem 0.5rem 1rem 0.5rem;
-  border: 1px solid $borderColor;
+  font-size: toRem(32);
+  color: $timerBorderColor;
+  background: $timerColorButton;
+  padding: toRem(16) toRem(8) toRem(16) toRem(8);
+  border: 1px solid $timerBorderColor;
   border-radius: 10px;
 
   &_hours,
@@ -21,7 +21,7 @@
   &_separator {
     display: block;
     width: 15px;
-    margin: 0 0.2rem 0 0.3rem;
+    margin: 0 toRem(3) 0 toRem(5);
     text-align: center;
   }
 }

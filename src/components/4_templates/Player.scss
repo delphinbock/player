@@ -1,23 +1,15 @@
 #player {
-  border: 1px solid $borderColor;
+  border: 1px solid $playerBorderColor;
   width: 500px;
   min-width: 500px;
   min-height: 300px;
   border-radius: 24px;
-  background: $bgColorPlayer;
+  background: $playerBgColor;
   position: relative;
   box-shadow: 0 0 0 2px rgb(255 114 0);
 }
 
 .borderAnimationColor {
-  border: 1px solid $borderColor;
-  width: 500px;
-  min-width: 500px;
-  min-height: 300px;
-  border-radius: 24px;
-  background: $bgColorPlayer;
-  position: relative;
-
   &:before,
   &:after {
     content: '';
@@ -26,7 +18,19 @@
     top: -3px;
     bottom: -3px;
     right: -3px;
-    background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00, #ffff00, #ff0000, #fb0094, #0000ff, #00ff00, #ffff00, #ff0000);
+    background: linear-gradient(
+      45deg,
+      $borderAnimationColorPurple,
+      $borderAnimationColorBlue,
+      $borderAnimationColorGreen,
+      $borderAnimationColorYellow,
+      $borderAnimationColorRed,
+      $borderAnimationColorPurple,
+      $borderAnimationColorBlue,
+      $borderAnimationColorGreen,
+      $borderAnimationColorYellow,
+      $borderAnimationColorRed
+    );
     background-size: 400%;
     width: calc(100% + 8px);
     height: calc(100% + 8px);

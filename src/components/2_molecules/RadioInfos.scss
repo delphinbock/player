@@ -5,10 +5,10 @@
   gap: 5px;
 
   &_radioName {
-    font-size: 1rem;
+    font-size: toRem(16);
     font-weight: 600;
     margin: 0;
-    color: $colorButton;
+    color: $radioInfosNameColor;
     border: none;
     background: transparent;
     padding: 0;
@@ -21,7 +21,7 @@
     flex-direction: row;
     justify-content: left;
     align-items: center;
-    color: gray;
-    font-size: 1rem;
+    color: $radioInfosColor;
+    font-size: toRem(16);
   }
 }

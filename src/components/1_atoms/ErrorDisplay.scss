@@ -1,10 +1,10 @@
 .errorDisplay {
-  background-color: $errorBgColor;
+  background: $errorBgColor;
   color: $errorColor;
   border: 1px solid $errorColor;
-  padding: 1rem;
-  margin: 0.5rem;
+  padding: toRem(16);
+  margin: toRem(8);
   text-align: center;
-  border-radius: 15px;
+  border-radius: toRem(15);
   font-family: sans-serif;
 }

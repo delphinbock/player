@@ -1,11 +1,11 @@
 .radioList {
-  margin: 1rem;
+  margin: toRem(16);
   min-width: 182px;
 
   &--off {
     cursor: initial;
     filter: grayscale(100%);
-    color: gray;
+    color: $radioListColorOff;
 
     &:hover {
       .radioItemWrapper {

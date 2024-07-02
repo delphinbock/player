@@ -1,16 +1,16 @@
 .playButton {
-  border: 1px solid $colorButton;
-  color: $colorButton;
+  border: 1px solid $playButtonColor;
+  color: $playButtonColor;
   border-radius: 100%;
-  margin: 1rem;
-  background-color: $bgColorButton;
+  margin: toRem(16);
+  background: $playButtonBgColor;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: 2.5rem;
+  font-size: toRem(40);
   min-height: 74px;
   min-width: 74px;
-  box-shadow: 0 0 0 0 rgba(232, 138, 61, 0.7);
+  box-shadow: 0 0 0 0 $playButtonBoxShadowColor;
   animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
 
   &_noPulse {
@@ -26,8 +26,8 @@
   }
 
   &:hover {
-    background-color: $bgColorButtonHover;
-    color: $colorButtonHover;
+    background: $playButtonBgColorHover;
+    color: $playButtonColorHover;
     cursor: pointer;
     animation: none;
   }
