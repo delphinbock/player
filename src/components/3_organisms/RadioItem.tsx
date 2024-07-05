@@ -8,11 +8,17 @@ import { RadioItemType } from '@typage/mainType'
 // Constants
 const { VITE_IMG_PATH } = import.meta.env
 
-// RadioItem component
-const RadioItem: RadioItemType = ({ radio, radioList, switchRadio }) => (
-  <button className="radioItemWrapper" onClick={radioList ? () => switchRadio(radio.id) : undefined}>
+const RadioItem: RadioItemType = ({ radio, switchRadio, currentRadioUrl }) => (
+  <button
+    className="radioItemWrapper"
+    onClick={() => {
+      if (radio.url !== currentRadioUrl) {
+        switchRadio(radio.id)
+      }
+    }}
+  >
     <RadioFlag flag={radio.flag} imgPath={VITE_IMG_PATH} />
-    <RadioInfos name={radio.name} state={radio.state} city={radio.city} />{' '}
+    <RadioInfos name={radio.name} state={radio.state} city={radio.city} />
   </button>
 )
 

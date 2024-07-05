@@ -29,6 +29,8 @@ export default defineConfig(({ mode }) => {
         '@objs': path.resolve(__dirname, './src/objs'),
         '@libs': path.resolve(__dirname, './src/libs'),
         '@typage': path.resolve(__dirname, './src/types'),
+        '@hooks': path.resolve(__dirname, './src/hooks'),
+        '@redux': path.resolve(__dirname, './src/redux'),
         'react-dom$': isProfiling ? path.resolve(__dirname, 'node_modules/react-dom/profiling') : path.resolve(__dirname, 'node_modules/react-dom'),
       }
     },

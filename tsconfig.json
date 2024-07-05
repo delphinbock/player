@@ -26,7 +26,8 @@
       "@objs/*": ["src/objs/*"],
       "@redux/*": ["src/redux/*"],
       "@libs/*": ["src/libs/*"],
-      "@typage/*": ["src/types/*"]
+      "@typage/*": ["src/types/*"],
+      "@hooks/*": ["src/hooks/*"]
     },
     "strict": true,
     "noUnusedLocals": true,

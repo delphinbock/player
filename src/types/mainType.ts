@@ -25,10 +25,12 @@ type RadioItemData = {
   flag: string
   state: string
   city: string
+  url: string
 }
 
 type RadioItemProps = {
-  radioList: boolean
+  id: number
+  radioList: RadioListData[]
   radio: RadioItemData
   switchRadio: (id: number) => void
 }
@@ -36,9 +38,22 @@ type RadioItemProps = {
 type RadioItemType = FC<RadioItemProps>
 
 // Radio list
+type RadioListData = {
+  id: number
+  name: string
+  country: string
+  state: string
+  city: string
+  style: string[]
+  url: string
+  logo: string
+  flag: string
+}
+
 type RadioListProps = {
-  radioList: boolean
+  radioList: RadioListData[]
   switchRadio: (id: number) => void
+  currentRadioUrl: string
 }
 
 type RadioListType = FC<RadioListProps>
@@ -116,6 +131,38 @@ type LoadImageProps = {
 
 type LoadImageType = (props: LoadImageProps) => Promise<string>;
 
+// Play reducer
+type CounterType = {
+  sec: string,
+  min: string,
+  hour: string
+}
+
+type StateType = {
+  audioRef: HTMLAudioElement | null,
+  currentRadioUrl: string,
+  playing: boolean,
+  radioList: RadioListData[],
+  loading: boolean,
+  error: string,
+  logo: string,
+  counter: CounterType,
+  volume: number,
+}
+
+type ActionType =
+  | { type: 'TOGGLE_PLAY' }
+  | { type: 'SWITCH_RADIO'; payload: { id: number; logo: string } }
+  | { type: 'SET_ERROR'; payload: string }
+  | { type: 'SET_LOADING'; payload: boolean }
+  | { type: 'SET_LOGO'; payload: string }
+  | { type: 'SET_COUNTER'; payload: { sec: string; min: string; hour: string } }
+  | { type: 'SET_VOLUME'; payload: number }
+  | { type: 'RESET' };
+
+
+type PlayReducerType = (state: StateType, action: ActionType) => StateType;
+
 export type {
   RadioListProps,
   RadioListType,
@@ -134,4 +181,8 @@ export type {
   ErrorType,
   LoadImageType,
   RadioHeaderType,
+  PlayReducerType,
+  StateType,
+  ActionType,
+  RadioListData,
 }

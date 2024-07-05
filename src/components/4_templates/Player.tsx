@@ -1,178 +1,112 @@
-// React
-import { FC, useRef, useEffect, useState, useCallback } from 'react'
-
-// Components
+import { FC, useEffect, useRef } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState, AppDispatch } from '@/redux/store'
+import { togglePlay, switchRadio, setVolume, setLoading, setError } from '@/redux/playerSlice'
+import { useErrorHandling } from '@hooks/useErrorHandling'
+import { useTimer } from '@hooks/useTimer'
 import RadioList from '@organisms/RadiosList'
 import RadioHeader from '@organisms/RadioHeader'
 
-// Obj
-import radioObj from '@objs/radios.json'
-
-// Radio player component
 const Player: FC = () => {
-  // Constants
-  const errorPlay = 'Playing error. The player will be reinitialized'
+  const state = useSelector((state: RootState) => state.player)
+  const dispatch = useDispatch<AppDispatch>()
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
-  // References
-  const audioRef = useRef<HTMLAudioElement>(new Audio(radioObj[2].url))
-  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const { handleStreamError, handleAudioError } = useErrorHandling()
+  const { counter } = useTimer(audioRef)
 
-  // States
-  const [playing, setPlaying] = useState<boolean>(false)
-  const [radioList, setRadioList] = useState<boolean>(true)
-  const [loading, setLoading] = useState<boolean>(false)
-  const [error, setError] = useState<string>('')
-  const [logo, setLogo] = useState<string>(radioObj[2].logo)
-  const [counter, setCounter] = useState<{
-    sec: string
-    min: string
-    hour: string
-  }>({
-    sec: '00',
-    min: '00',
-    hour: '00',
-  })
-  const [volume, setVolume] = useState<number>(0.5)
-
-  // Toggle play or pause state
-  const toggle = useCallback(() => {
-    setPlaying((prevPlaying) => !prevPlaying)
-    setRadioList((prevRadioList) => !prevRadioList)
-  }, [])
-
-  // Switch radio station
-  const switchRadio = useCallback(
-    (id: number) => {
-      // Set states
-      setLogo(radioObj[id].logo)
-      setRadioList(!radioList)
-      setLoading(true)
-
-      // Stop stream
-      audioRef.current.pause()
-
-      // Load new stream
-      audioRef.current = new Audio(radioObj[id].url)
-
-      // Play
-      setPlaying((prevPlaying) => !prevPlaying)
-    },
-    [audioRef, radioList]
-  )
-
-  // Define handleAudioError outside the useEffect
-  const handleAudioError = useCallback(() => {
-    // SetState
-    setError(errorPlay)
-
-    // Display message during 5s
-    setTimeout(() => {
-      // Reload page
-      window.location.reload()
-    }, 5000)
-  }, [])
-
-  // Define a function to handle stream error outside the useEffect
-  const handleStreamError = useCallback(() => {
-    if (audioRef.current.currentTime === 0) {
-      handleAudioError()
-    }
-  }, [handleAudioError])
-
-  // Define a named function outside of the useEffect
-  const handleAudioPlay = useCallback(() => {
-    // Set play state directly with the current value
-    setPlaying((prevPlaying) => prevPlaying)
-
-    // Set loading state
-    setLoading(false)
-
-    // Reinitialize if the stream is not read after a certain time
-    setTimeout(() => handleStreamError(), 10000)
-  }, [handleStreamError])
-
-  // Play effects
   useEffect(() => {
-    // Play or pause based on the playing state
-    if (playing) {
-      setTimeout(() => {
-        let promise = audioRef.current.play()
+    const handlePlayPause = async () => {
+      if (audioRef.current) {
+        const isPlaying =
+          audioRef.current.currentTime > 0 &&
+          !audioRef.current.paused &&
+          !audioRef.current.ended &&
+          audioRef.current.readyState > audioRef.current.HAVE_CURRENT_DATA
 
-        // Audio play promise
-        if (promise !== null) {
-          promise.then(handleAudioPlay).catch(handleAudioError)
+        if (state.playing && !isPlaying) {
+          try {
+            await audioRef.current.play()
+            dispatch(setLoading(false))
+          } catch (error: any) {
+            if (error.name === 'NotAllowedError' || error.name === 'AbortError') {
+              console.error('Playback error:', error)
+              handleAudioError()
+            } else {
+              throw error
+            }
+          }
+        } else {
+          audioRef.current.pause()
         }
-      }, 500)
-    } else {
-      audioRef.current.pause()
-    }
-
-    // Cleanup function for the effect
-    return () => clearInterval(intervalRef.current!)
-  }, [audioRef, playing, handleAudioError, handleAudioPlay])
-
-  // Border effects
-  useEffect(() => {
-    // Decrease counter function
-    const increaseDate = () => {
-      if (playing) {
-        // Format seconds
-        const result = new Date(audioRef.current.currentTime * 1000).toISOString().slice(11, 19)
-
-        // Split
-        let split = result.split(':')
-
-        // Object
-        let obj = { sec: split[2], min: split[1], hour: split[0] }
-
-        // Set state counter
-        setCounter(obj)
-
-        return obj
       }
     }
 
-    // Run function every second
-    intervalRef.current = setInterval(() => {
-      increaseDate()
-    }, 1000)
+    handlePlayPause()
 
-    return () => clearInterval(intervalRef.current!)
-  }, [playing])
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause()
+      }
+    }
+  }, [state.playing, state.currentRadioUrl, dispatch, handleAudioError])
 
-  // Theme
   useEffect(() => {
-    // Ajouter la classe au body
+    if (audioRef.current) {
+      audioRef.current.volume = state.volume
+    }
+  }, [state.volume])
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.pause()
+      audioRef.current.src = state.currentRadioUrl
+      if (state.playing) {
+        audioRef.current.load()
+        audioRef.current.play().catch(handleStreamError)
+      }
+    }
+  }, [state.currentRadioUrl, state.playing, handleStreamError])
+
+  useEffect(() => {
     document.body.classList.add('dark')
 
-    // Nettoyage : retirer la classe au démontage du composant
     return () => {
       document.body.classList.remove('dark')
     }
   }, [])
 
-  // Volume change
-  const changeVolume = (newVolume: number) => {
-    // Set state
-    setVolume(newVolume)
+  const handleVolumeChange = (volume: number) => {
+    dispatch(setVolume(volume))
+    if (audioRef.current) {
+      audioRef.current.volume = volume
+    }
+  }
 
-    // Up reference
-    audioRef.current.volume = newVolume
+  const handleRadioSwitch = (id: number) => {
+    const radioToPlay = state.radioList.find((radio) => radio.id === id)
+    if (!radioToPlay) return
+
+    if (state.currentRadioUrl !== radioToPlay.url) {
+      dispatch(switchRadio(id))
+      dispatch(setLoading(true))
+    }
   }
 
   return (
-    <div id="player" className={playing ? 'borderAnimationColor' : ''}>
+    <div id="player" className={state.playing ? 'borderAnimationColor' : ''}>
+      <audio ref={audioRef} src={state.currentRadioUrl} onCanPlay={() => dispatch(setLoading(false))}></audio>
       <RadioHeader
-        playing={playing}
-        toggle={toggle}
-        loading={loading}
-        volume={volume}
-        changeVolume={changeVolume}
-        error={error}
+        playing={state.playing}
+        toggle={() => dispatch(togglePlay())}
+        loading={state.loading}
+        volume={state.volume}
+        changeVolume={handleVolumeChange}
+        error={state.error}
         counter={counter}
-        logo={logo}
+        logo={state.logo}
       />
-      <RadioList radioList={radioList} switchRadio={switchRadio} />
+      <RadioList radioList={state.radioList} switchRadio={handleRadioSwitch} currentRadioUrl={state.currentRadioUrl} />
     </div>
   )
 }

@@ -1,19 +1,34 @@
-// Obj
-import radioObj from '@objs/radios.json'
-
 // Types
-import { RadioListType, RadioItemData } from '@typage/mainType'
+import { RadioListType } from '@typage/mainType'
 
 // Components
-import RadioItem from '@/components/3_organisms/RadioItem'
+import RadioItem from '@organisms/RadioItem'
 
-// RadioList component
-const RadioList: RadioListType = ({ radioList, switchRadio }) => {
+// Redux
+import { useSelector } from 'react-redux'
+import { RootState } from '@/redux/store'
+
+const RadioList: RadioListType = ({ radioList, switchRadio, currentRadioUrl }) => {
+  const playingRadioUrl = useSelector((state: RootState) => state.player.currentRadioUrl)
+
+  // Sort the list by name
+  const sortedRadioList = [...radioList].sort((a, b) => a.name.localeCompare(b.name))
+
   return (
-    <div className={radioList ? 'radioList' : 'radioList radioList--off'}>
-      {(radioObj as RadioItemData[]).map((radio) => (
-        <RadioItem key={`radio_${radio.id}`} id={radio.id} radio={radio} radioList={radioList} switchRadio={switchRadio} />
-      ))}
+    <div className="radioList">
+      {sortedRadioList.map(
+        (radio) =>
+          radio.url !== playingRadioUrl && (
+            <RadioItem
+              key={`radio_${radio.id}`}
+              id={radio.id}
+              radio={radio}
+              switchRadio={switchRadio}
+              radioList={radioList}
+              currentRadioUrl={currentRadioUrl}
+            />
+          )
+      )}
     </div>
   )
 }

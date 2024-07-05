@@ -1,12 +1,12 @@
 // Types
 import { ErrorType } from '@typage/mainType'
 
-const ErrorDisplay: ErrorType = ({ error }) => {
+const ErrorDisplay: ErrorType = ({ error: errorMessage }) => {
   return (
     <>
-      {error && (
+      {errorMessage && (
         <div className="errorDisplay">
-          <span>{error}</span>
+          <span>{errorMessage}</span>
         </div>
       )}
     </>
