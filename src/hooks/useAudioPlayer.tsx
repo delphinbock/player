@@ -1,9 +1,12 @@
-// useAudioPlayer.ts
-
+// React
 import { useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+
+// Types
 import { StateType } from '@typage/mainType'
-import { togglePlay, switchRadio, setVolume, resetPlayer, setError, setLoading, setLogo, setCounter } from '@redux/playerSlice' // Adjust the import path based on your project structure
+
+// Redux
+import { useDispatch, useSelector } from 'react-redux'
+import { togglePlay, switchRadio, setVolume, resetPlayer, setError, setLoading, setLogo, setCounter } from '@redux/playerSlice'
 
 export const useAudioPlayer = () => {
   const state = useSelector((state: { player: StateType }) => state.player)

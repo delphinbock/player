@@ -1,73 +1,59 @@
+// React
 import { FC, useEffect, useRef } from 'react'
+
+// Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { RootState, AppDispatch } from '@/redux/store'
-import { togglePlay, switchRadio, setVolume, setLoading, setError } from '@/redux/playerSlice'
+import { RootState, AppDispatch } from '@redux/store'
+import { togglePlay, switchRadio, setVolume, setLoading, setError } from '@redux/playerSlice'
+
+// Hooks
 import { useErrorHandling } from '@hooks/useErrorHandling'
 import { useTimer } from '@hooks/useTimer'
+
+// Components
 import RadioList from '@organisms/RadiosList'
 import RadioHeader from '@organisms/RadioHeader'
 
 const Player: FC = () => {
+  // Redux states
   const state = useSelector((state: RootState) => state.player)
   const dispatch = useDispatch<AppDispatch>()
+
+  // References
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
-  const { handleStreamError, handleAudioError } = useErrorHandling()
+  // Destructuring hooks
+  const { handleStreamError } = useErrorHandling()
   const { counter } = useTimer(audioRef)
 
+  // Side effects
   useEffect(() => {
-    const handlePlayPause = async () => {
-      if (audioRef.current) {
-        const isPlaying =
-          audioRef.current.currentTime > 0 &&
-          !audioRef.current.paused &&
-          !audioRef.current.ended &&
-          audioRef.current.readyState > audioRef.current.HAVE_CURRENT_DATA
-
-        if (state.playing && !isPlaying) {
-          try {
-            await audioRef.current.play()
-            dispatch(setLoading(false))
-          } catch (error: any) {
-            if (error.name === 'NotAllowedError' || error.name === 'AbortError') {
-              console.error('Playback error:', error)
-              handleAudioError()
-            } else {
-              throw error
-            }
-          }
-        } else {
-          audioRef.current.pause()
-        }
-      }
-    }
-
-    handlePlayPause()
-
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause()
-      }
-    }
-  }, [state.playing, state.currentRadioUrl, dispatch, handleAudioError])
-
-  useEffect(() => {
+    // Check audio reference
     if (audioRef.current) {
-      audioRef.current.volume = state.volume
-    }
-  }, [state.volume])
-
-  useEffect(() => {
-    if (audioRef.current) {
+      // Pause to audio element
       audioRef.current.pause()
+
+      // Up URL to audio element source
       audioRef.current.src = state.currentRadioUrl
+
+      // In playing
       if (state.playing) {
+        // Load the audio element with its new source
         audioRef.current.load()
-        audioRef.current.play().catch(handleStreamError)
+
+        // On error during the playing
+        audioRef.current.play().catch((error) => {
+          // Error
+          handleStreamError()
+
+          // Record error to Redux store
+          dispatch(setError(error.message))
+        })
       }
     }
-  }, [state.currentRadioUrl, state.playing, handleStreamError])
+  }, [state.currentRadioUrl, state.playing, handleStreamError, dispatch])
 
+  // Set the dark template
   useEffect(() => {
     document.body.classList.add('dark')
 
@@ -76,21 +62,31 @@ const Player: FC = () => {
     }
   }, [])
 
+  // Change the volume
   const handleVolumeChange = (volume: number) => {
+    // Record the volume settings to Redux store
     dispatch(setVolume(volume))
+
+    // Reinitialize the volume
     if (audioRef.current) {
       audioRef.current.volume = volume
     }
   }
 
+  // Switch of radio
   const handleRadioSwitch = (id: number) => {
-    const radioToPlay = state.radioList.find((radio) => radio.id === id)
-    if (!radioToPlay) return
+    // Check the audio reference
+    if (audioRef.current) {
+      // Pause to audio element
+      audioRef.current.pause()
 
-    if (state.currentRadioUrl !== radioToPlay.url) {
-      dispatch(switchRadio(id))
-      dispatch(setLoading(true))
+      // Reinitialize the timer
+      audioRef.current.currentTime = 0
     }
+
+    // Record the settings changments to Redux store
+    dispatch(setLoading(true))
+    dispatch(switchRadio(id))
   }
 
   return (
@@ -106,7 +102,13 @@ const Player: FC = () => {
         counter={counter}
         logo={state.logo}
       />
-      <RadioList radioList={state.radioList} switchRadio={handleRadioSwitch} currentRadioUrl={state.currentRadioUrl} />
+      <RadioList
+        radioList={state.radioList}
+        switchRadio={handleRadioSwitch}
+        currentRadioUrl={state.currentRadioUrl}
+        counter={counter}
+        playing={state.playing}
+      />
     </div>
   )
 }

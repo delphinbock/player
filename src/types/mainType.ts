@@ -33,6 +33,7 @@ type RadioItemProps = {
   radioList: RadioListData[]
   radio: RadioItemData
   switchRadio: (id: number) => void
+  currentRadioUrl: string
 }
 
 type RadioItemType = FC<RadioItemProps>
@@ -54,6 +55,12 @@ type RadioListProps = {
   radioList: RadioListData[]
   switchRadio: (id: number) => void
   currentRadioUrl: string
+  counter: {
+    sec: string
+    min: string
+    hour: string
+  }
+  playing: boolean
 }
 
 type RadioListType = FC<RadioListProps>

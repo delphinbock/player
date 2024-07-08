@@ -1,10 +1,8 @@
-// useErrorHandling.ts
-
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { StateType } from '@typage/mainType'
-import { resetPlayer, setError, setLoading } from '@redux/playerSlice' // Adjust the import path based on your project structure
+import { resetPlayer, setError, setLoading } from '@redux/playerSlice'
 
 export const useErrorHandling = () => {
   const dispatch = useDispatch()
@@ -13,7 +11,7 @@ export const useErrorHandling = () => {
 
   const handleAudioError = useCallback(() => {
     dispatch(setError(errorPlay))
-    dispatch(setLoading(false)) // Ensure setLoading is triggered correctly here
+    dispatch(setLoading(false)) // Assure that setLoading is correctly set
 
     setTimeout(() => {
       dispatch(resetPlayer())
@@ -22,10 +20,7 @@ export const useErrorHandling = () => {
   }, [dispatch])
 
   const handleStreamError = useCallback(() => {
-    if (audioRef && audioRef.currentTime === 0) {
-      // Check that the stream has started
-      handleAudioError()
-    }
+    handleAudioError()
   }, [audioRef, handleAudioError])
 
   return { handleAudioError, handleStreamError }

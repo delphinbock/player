@@ -26,6 +26,7 @@
       }
     ]
   },
+  "@typescript-eslint/semi": ["error", "never"],
   "settings": {
     "import/resolver": {
       "node": {

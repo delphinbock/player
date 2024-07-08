@@ -1,6 +1,6 @@
 // Components
 import RadioFlag from '@atoms/RadioFlag'
-import RadioInfos from '@/components/2_molecules/RadioInfos'
+import RadioInfos from '@molecules/RadioInfos'
 
 // Types
 import { RadioItemType } from '@typage/mainType'
