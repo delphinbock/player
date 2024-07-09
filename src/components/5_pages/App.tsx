@@ -1,10 +1,15 @@
+// React
+import { lazy, Suspense } from 'react'
+
 // Components
-import Player from '@templates/Player'
+const Player = lazy(() => import('@templates/Player'))
 
 const App = () => {
   return (
     <div id="root">
-      <Player />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Player />
+      </Suspense>
     </div>
   )
 }

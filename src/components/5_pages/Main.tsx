@@ -12,11 +12,22 @@ import App from './App'
 // Styles
 import '@pages/Main.scss'
 
+// Root element
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-root.render(
-  <React.StrictMode>
+
+// Alias Vite => import.meta.env.MODE === 'development' - Vite detect automatically the environment
+if (import.meta.env.DEV) {
+  root.render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </React.StrictMode>
+  )
+} else {
+  root.render(
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>
-)
+  )
+}

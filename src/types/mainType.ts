@@ -1,5 +1,5 @@
 // React
-import { FC } from 'react'
+import { FC, MutableRefObject } from 'react'
 
 // Radio flag
 type RadioFlagProps = {
@@ -130,6 +130,28 @@ type RadioHeaderProps = {
 
 type RadioHeaderType = FC<RadioHeaderProps>
 
+// Audio reference
+type UseAudioPlayerProps = {
+  audioRef: MutableRefObject<HTMLAudioElement | null>
+}
+
+type UseAudioPlayerData = {
+  playAudio: () => void;
+  pauseAudio: () => void;
+  handleVolumeChange: (volume: number) => void;
+  handleRadioSwitch: (id: number) => void;
+}
+
+type UseAudioPlayerType = (props: UseAudioPlayerProps) => UseAudioPlayerData
+
+// Radio element
+type AudioElementProps = {
+  currentRadioUrl: string
+  audioRef: MutableRefObject<HTMLAudioElement | null>
+}
+
+type RadioElementType = FC<AudioElementProps>
+
 // Load image
 type LoadImageProps = {
   nameStr: string
@@ -192,4 +214,8 @@ export type {
   StateType,
   ActionType,
   RadioListData,
+  RadioElementType,
+  AudioElementProps,
+  UseAudioPlayerProps,
+  UseAudioPlayerType,
 }

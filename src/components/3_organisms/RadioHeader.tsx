@@ -1,9 +1,12 @@
-// components
+// React
+import { memo } from 'react'
+
+// Components
 import PlayControl from '@molecules/PlayControl'
 import VolumeControl from '@molecules/VolumeControl'
 import Timer from '@molecules/Timer'
 import RadioLogo from '@atoms/RadioLogo'
-import ErrorDisplay from '@/components/1_atoms/ErrorDisplay'
+import ErrorDisplay from '@atoms/ErrorDisplay'
 
 // Types
 import { RadioHeaderType } from '@typage/mainType'
@@ -11,7 +14,7 @@ import { RadioHeaderType } from '@typage/mainType'
 // Constants
 const { VITE_IMG_PATH } = import.meta.env
 
-const RadioHeader: RadioHeaderType = ({ playing, toggle, loading, volume, changeVolume, error, counter, logo }) => {
+const RadioHeader: RadioHeaderType = memo(({ playing, toggle, loading, volume, changeVolume, error, counter, logo }) => {
   return (
     <div className="radioHeader">
       <div className="radioHeader_controllers">
@@ -27,6 +30,6 @@ const RadioHeader: RadioHeaderType = ({ playing, toggle, loading, volume, change
       </div>
     </div>
   )
-}
+})
 
 export default RadioHeader

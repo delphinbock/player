@@ -1,3 +1,6 @@
+// React
+import { memo } from 'react'
+
 // Types
 import { PlayControlType } from '@typage/mainType'
 
@@ -5,6 +8,6 @@ import { PlayControlType } from '@typage/mainType'
 import PlayButton from '@atoms/PlayButton'
 import LoadingButton from '@atoms/LoadingButton'
 
-const PlayControl: PlayControlType = ({ playing, toggle, loading }) => <>{!loading ? <PlayButton playing={playing} onClick={toggle} /> : <LoadingButton />}</>
+const PlayControl: PlayControlType = memo(({ playing, toggle, loading }) => (loading ? <LoadingButton /> : <PlayButton playing={playing} onClick={toggle} />))
 
 export default PlayControl

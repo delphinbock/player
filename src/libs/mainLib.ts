@@ -19,7 +19,7 @@ const loadImage: LoadImageType = async ({ nameStr, imgPath }) => {
     if (imageCache.has(nameStr)) {
       const cachedImage = imageCache.get(nameStr)
       if (cachedImage) {
-        return cachedImage;
+        return cachedImage
       }
     }
 
@@ -31,11 +31,11 @@ const loadImage: LoadImageType = async ({ nameStr, imgPath }) => {
     // Cache the fetched image
     imageCache.set(nameStr, base64Image)
 
-    return base64Image;
+    return base64Image
   } catch (error) {
-    console.error(':( Error fetching image: ', error)
+    console.error('☹️​ Error fetching image: ', error)
     throw error
   }
-};
+}
 
 export { loadImage }

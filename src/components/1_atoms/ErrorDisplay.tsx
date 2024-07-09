@@ -1,16 +1,23 @@
+// React
+import { memo } from 'react'
+
 // Types
 import { ErrorType } from '@typage/mainType'
 
-const ErrorDisplay: ErrorType = ({ error: errorMessage }) => {
+// Components
+import CounterError from '@atoms/CounterError'
+
+const ErrorDisplay: ErrorType = memo(({ error }) => {
   return (
     <>
-      {errorMessage && (
+      {!error && (
         <div className="errorDisplay">
-          <span>{errorMessage}</span>
+          <CounterError />
+          <span>{`☹️​ ${error}`}</span>
         </div>
       )}
     </>
   )
-}
+})
 
 export default ErrorDisplay

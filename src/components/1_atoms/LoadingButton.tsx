@@ -1,8 +1,8 @@
 // React
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 // Loading button component
-const LoadingButton: FC = () => {
+const LoadingButton: FC = memo(() => {
   return (
     <div className="spinner">
       <div className="spinner_bounce1"></div>
@@ -10,6 +10,6 @@ const LoadingButton: FC = () => {
       <div className="spinner_bounce3"></div>
     </div>
   )
-}
+})
 
 export default LoadingButton

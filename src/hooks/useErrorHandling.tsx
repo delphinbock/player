@@ -1,27 +1,33 @@
+// React
 import { useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
+// Types
 import { StateType } from '@typage/mainType'
-import { resetPlayer, setError, setLoading } from '@redux/playerSlice'
 
-export const useErrorHandling = () => {
+// Redux
+import { useDispatch, useSelector } from 'react-redux'
+import { setError, setLoading } from '@redux/playerSlice'
+
+const useErrorHandling = () => {
+  // Redux record default
   const dispatch = useDispatch()
+
+  // Redux states
   const { audioRef } = useSelector((state: { player: StateType }) => state.player)
-  const errorPlay = 'Playing error. The player will be reinitialized'
 
+  // Audio error
   const handleAudioError = useCallback(() => {
-    dispatch(setError(errorPlay))
-    dispatch(setLoading(false)) // Assure that setLoading is correctly set
-
-    setTimeout(() => {
-      dispatch(resetPlayer())
-      dispatch(setError(''))
-    }, 5000)
+    // Redux records
+    dispatch(setError('☹️​ Playing error. The player will be reinitialized'))
+    dispatch(setLoading(false))
   }, [dispatch])
 
+  // Stream error
   const handleStreamError = useCallback(() => {
     handleAudioError()
   }, [audioRef, handleAudioError])
 
   return { handleAudioError, handleStreamError }
 }
+
+export default useErrorHandling

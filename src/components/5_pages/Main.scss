@@ -2,6 +2,7 @@
 @import '@base/_base';
 
 // Atoms components
+@import '@atoms/AudioElement';
 @import '@atoms/ErrorDisplay';
 @import '@atoms/LoadingButton';
 @import '@atoms/PlayButton';
@@ -20,7 +21,7 @@
 @import '@organisms/RadioList';
 
 // Templates
-@import "@templates/Player";
+@import '@templates/Player';
 
 // Pages
 @import '@pages/App';

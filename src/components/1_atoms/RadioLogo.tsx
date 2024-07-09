@@ -1,5 +1,5 @@
 // React
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 // Types
 import { RadioLogoType } from '@typage/mainType'
@@ -11,8 +11,8 @@ const RadioLogo: RadioLogoType = ({ logo, imgPath }) => {
   // States
   const [imageUrl, setImageUrl] = useState<string>('')
 
-  useEffect(() => {
-    const loadImages = async () => {
+  const loadImages = useMemo(
+    () => async () => {
       try {
         // Get image base64 file
         const base64Image = await loadImage({ nameStr: logo, imgPath: `${imgPath}logos/` })
@@ -22,12 +22,34 @@ const RadioLogo: RadioLogoType = ({ logo, imgPath }) => {
       } catch (error) {
         console.error('☹️ Error loading image:', error)
       }
+    },
+    [logo, imgPath]
+  )
+
+  // Use IntersectionObserver to trigger image loading
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          loadImages()
+          observer.disconnect()
+        }
+      })
+    })
+
+    // Using optional chaining (?.) to safely access querySelector result
+    const imgElement = document.querySelector('.radioLogo img')
+    if (imgElement) {
+      observer.observe(imgElement)
     }
-    loadImages()
-  }, [logo, imgPath])
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [loadImages])
 
   return (
-    <div className='radioLogo'>
+    <div className="radioLogo">
       <img src={imageUrl} alt={`logo_${logo}`} loading="lazy" />
     </div>
   )

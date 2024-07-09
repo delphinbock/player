@@ -1,3 +1,6 @@
+// React
+import { useEffect, useState, memo, useMemo, useCallback } from 'react'
+
 // Types
 import { RadioListType } from '@typage/mainType'
 
@@ -7,9 +10,8 @@ import RadioItem from '@organisms/RadioItem'
 // Redux
 import { useSelector } from 'react-redux'
 import { RootState } from '@redux/store'
-import { useEffect, useState } from 'react'
 
-const RadioList: RadioListType = ({ radioList, switchRadio, currentRadioUrl, counter }) => {
+const RadioList: RadioListType = memo(({ radioList, switchRadio, currentRadioUrl, counter }) => {
   // Local states
   const [isListDisabled, setListDisabled] = useState(false)
   const [lessCounter, setLessCounter] = useState(false)
@@ -18,7 +20,9 @@ const RadioList: RadioListType = ({ radioList, switchRadio, currentRadioUrl, cou
   const playingRadioUrl = useSelector((state: RootState) => state.player.currentRadioUrl)
 
   // Sort the list by name
-  const sortedRadioList = [...radioList].sort((a, b) => a.name.localeCompare(b.name))
+  const sortedRadioList = useMemo(() => {
+    return [...radioList].sort((a, b) => a.name.localeCompare(b.name))
+  }, [radioList])
 
   // ! Avoid playing errors
   // Check if the counter is less than 1 seconde
@@ -28,23 +32,26 @@ const RadioList: RadioListType = ({ radioList, switchRadio, currentRadioUrl, cou
     } else {
       setLessCounter(false)
     }
-  })
+  }, [counter.sec])
 
   // Select another radio
-  const handleSwitchRadio = (id: number) => {
-    if (!isListDisabled) {
-      // Disable the radios list
-      setListDisabled(true)
+  const handleSwitchRadio = useCallback(
+    (id: number) => {
+      if (!isListDisabled) {
+        // Disable the radios list
+        setListDisabled(true)
 
-      // Switch radio
-      switchRadio(id)
+        // Switch radio
+        switchRadio(id)
 
-      // Re-able the radios list after 2 secondes (2 > 1)
-      setTimeout(() => {
-        setListDisabled(false)
-      }, 2000)
-    }
-  }
+        // Re-able the radios list after 2 secondes (2 > 1)
+        setTimeout(() => {
+          setListDisabled(false)
+        }, 2000)
+      }
+    },
+    [isListDisabled, switchRadio]
+  )
 
   return (
     <div className={lessCounter && isListDisabled ? 'radioList radioList--off' : 'radioList'}>
@@ -63,6 +70,6 @@ const RadioList: RadioListType = ({ radioList, switchRadio, currentRadioUrl, cou
       )}
     </div>
   )
-}
+})
 
 export default RadioList

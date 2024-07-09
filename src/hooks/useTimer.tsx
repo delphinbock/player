@@ -1,33 +1,54 @@
-import { useRef, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { StateType } from '@typage/mainType';
-import { setCounter } from '@redux/playerSlice'; // Adjust the import path based on your project structure
+// React
+import { useRef, useEffect, RefObject } from 'react'
 
-export const useTimer = (audioRef: React.RefObject<HTMLAudioElement>) => {
-  const dispatch = useDispatch();
-  const state = useSelector((state: { player: StateType }) => state.player);
-  
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+// Types
+import { StateType } from '@typage/mainType'
+
+// Redux
+import { useDispatch, useSelector } from 'react-redux'
+import { setCounter } from '@redux/playerSlice'
+
+const useTimer = (audioRef: RefObject<HTMLAudioElement>) => {
+  // Redux record default
+  const dispatch = useDispatch()
+
+  // Redux state
+  const state = useSelector((state: { player: StateType }) => state.player)
+
+  // Reference
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
-    const increaseDate = () => {
+    const increaseTime = () => {
+      // Check if playing
       if (state.playing && audioRef.current) {
-        const result = new Date(audioRef.current.currentTime * 1000).toISOString().slice(11, 19);
-        const [hour, min, sec] = result.split(':');
-        dispatch(setCounter({ sec, min, hour }));
-      }
-    };
+        // Convert current audio to millisecondes
+        const result = new Date(audioRef.current.currentTime * 1000).toISOString().slice(11, 19)
 
+        // Split the time string
+        const [hour, min, sec] = result.split(':')
+
+        // Redux record
+        dispatch(setCounter({ sec, min, hour }))
+      }
+    }
+
+    // Check if playing
     if (state.playing) {
-      intervalRef.current = setInterval(increaseDate, 1000);
+      // Increase the time each seconde
+      intervalRef.current = setInterval(increaseTime, 1000)
     }
 
     return () => {
+      // Check if the interval reference is existing
       if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+        // Clean the setInterval function to stop it
+        clearInterval(intervalRef.current)
       }
-    };
-  }, [state.playing, dispatch, audioRef]);
+    }
+  }, [state.playing, dispatch, audioRef])
 
-  return { counter: state.counter };
-};
+  return { counter: state.counter }
+}
+
+export default useTimer
