@@ -109,6 +109,13 @@ type RadioLogoProps = {
 
 type RadioLogoType = FC<RadioLogoProps>
 
+// Countdown
+type CountdownProps = {
+  timerInSecondes: number
+}
+
+type CountdownType = FC<CountdownProps>
+
 // Errors
 type ErrorProps = {
   error: string
@@ -218,4 +225,5 @@ export type {
   AudioElementProps,
   UseAudioPlayerProps,
   UseAudioPlayerType,
+  CountdownType,
 }

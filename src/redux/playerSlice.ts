@@ -53,7 +53,7 @@ const playerSlice = createSlice({
     }),
     resetPlayer: (state) => ({
       ...state,
-      playing: !state.playing,
+      playing: false,
       loading: false,
       error: '',
       logo: radioObj[2].logo,

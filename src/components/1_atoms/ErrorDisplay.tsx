@@ -1,19 +1,28 @@
 // React
 import { memo } from 'react'
 
+// Redux
+import { useSelector } from 'react-redux'
+import { RootState } from '@redux/store'
+
 // Types
 import { ErrorType } from '@typage/mainType'
 
 // Components
-import CounterError from '@atoms/CounterError'
+import Counter from '@atoms/Countdown'
 
-const ErrorDisplay: ErrorType = memo(({ error }) => {
+const ErrorDisplay: ErrorType = memo(() => {
+  // Redux states
+  const { error } = useSelector((state: RootState) => state.player)
+
   return (
     <>
-      {!error && (
+      {error && (
         <div className="errorDisplay">
-          <CounterError />
-          <span>{`☹️​ ${error}`}</span>
+          <p>
+            Player will be reset in <Counter timerInSecondes={5} /> seconds
+          </p>
+          <p>{`☹️​ ${error}`}</p>
         </div>
       )}
     </>
