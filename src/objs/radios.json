@@ -8,6 +8,7 @@
     "style": ["dance", "oldies", "80s"],
     "url": "http://s1.nexuscast.com:8135/;;audio.mp3",
     "logo": "back_to_80",
+    "logo_square": "back_to_80_square",
     "flag": "us"
   },
   {
@@ -19,6 +20,7 @@
     "style": ["rock", "blue", "country"],
     "url": "https://c5.radioboss.fm:18224/stream",
     "logo": "american_road",
+    "logo_square": "american_road_square",
     "flag": "us"
   },
   {
@@ -30,6 +32,7 @@
     "style": ["lounge", "jazz"],
     "url": "https://jazzlounge.ice.infomaniak.ch/jazzlounge-high.mp3",
     "logo": "jazz_lounge_radio",
+    "logo_square": "jazz_lounge_radio_square",
     "flag": "fr"
   },
   {
@@ -38,9 +41,10 @@
     "country": "canada",
     "state": "ontario",
     "city": "toronto",
-    "style": ["dance", "80s", "oldies"],
+    "style": ["dance", "oldies", "80s"],
     "url": "https://radio.streemlion.com:1235/stream",
     "logo": "wave_80",
+    "logo_square": "wave_80_square",
     "flag": "ca"
   },
   {
@@ -52,6 +56,7 @@
     "style": ["jazz"],
     "url": "https://jking.cdnstream1.com/b22139_128mp3",
     "logo": "101_smooth_jazz",
+    "logo_square": "101_smooth_jazz_square",
     "flag": "us"
   }
 ]

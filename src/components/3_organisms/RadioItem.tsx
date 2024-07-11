@@ -2,7 +2,7 @@
 import { memo, useCallback } from 'react'
 
 // Components
-import RadioFlag from '@atoms/RadioFlag'
+import RadioLogo from '@atoms/RadioLogo'
 import RadioInfos from '@molecules/RadioInfos'
 
 // Types
@@ -21,10 +21,13 @@ const RadioItem: RadioItemType = memo(({ radio, switchRadio, currentRadioUrl }) 
 
   return (
     <button className="radioItemWrapper" onClick={handleClick}>
-      <RadioFlag flag={radio.flag} imgPath={VITE_IMG_PATH} />
-      <RadioInfos name={radio.name} state={radio.state} city={radio.city} />
+      <RadioLogo logo={radio.logo_square} imgPath={VITE_IMG_PATH} />
+      <RadioInfos name={radio.name} state={radio.state} city={radio.city} flag={radio.flag} style={radio.style} />
     </button>
   )
 })
+
+// Display the component name in react dev tools profiler
+RadioItem.displayName = 'RadioItem'
 
 export default RadioItem

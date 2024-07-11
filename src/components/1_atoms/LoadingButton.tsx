@@ -12,4 +12,7 @@ const LoadingButton: FC = memo(() => {
   )
 })
 
+// Display the component name in react dev tools profiler
+LoadingButton.displayName = 'LoadingButton'
+
 export default LoadingButton

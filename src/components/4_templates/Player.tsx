@@ -49,4 +49,7 @@ const Player: FC = memo(() => {
   )
 })
 
+// Display the component name in react dev tools profiler
+Player.displayName = 'Player'
+
 export default Player

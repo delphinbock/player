@@ -11,4 +11,7 @@ const Timer: TimerType = ({ counter }) => (
   </div>
 )
 
+// Display the component name in react dev tools profiler
+Timer.displayName = 'Timer'
+
 export default Timer

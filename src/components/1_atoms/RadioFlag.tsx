@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { RadioFlagType } from '@typage/mainType'
 
 // Libs
-import { loadImage } from '@/libs/mainLib'
+import { loadImage } from '@libs/mainLib'
 
 // RadioFlag component
 const RadioFlag: RadioFlagType = ({ flag, imgPath }) => {
@@ -33,5 +33,8 @@ const RadioFlag: RadioFlagType = ({ flag, imgPath }) => {
 
   return <img className="radioFlag" src={imageUrl} alt={`flag_${flag}`} loading="lazy" />
 }
+
+// Display the component name in react dev tools profiler
+RadioFlag.displayName = 'RadioFlag'
 
 export default RadioFlag

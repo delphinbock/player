@@ -32,4 +32,7 @@ const RadioHeader: RadioHeaderType = memo(({ playing, toggle, loading, volume, c
   )
 })
 
+// Display the component name in react dev tools profiler
+RadioHeader.displayName = 'RadioHeader'
+
 export default RadioHeader

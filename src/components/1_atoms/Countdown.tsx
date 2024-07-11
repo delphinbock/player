@@ -65,4 +65,7 @@ const Counter: CountdownType = memo(({ timerInSecondes }) => {
   return <>{countdownRef.current !== null && countdownRef.current > 0 && <span className="countdownDisplay">{countdownRef.current}</span>}</>
 })
 
+// Display the component name in react dev tools profiler
+Counter.displayName = 'Counter'
+
 export default Counter

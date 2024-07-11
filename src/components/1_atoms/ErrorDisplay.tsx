@@ -29,4 +29,7 @@ const ErrorDisplay: ErrorType = memo(() => {
   )
 })
 
+// Display the component name in react dev tools profiler
+ErrorDisplay.displayName = 'ErrorDisplay'
+
 export default ErrorDisplay

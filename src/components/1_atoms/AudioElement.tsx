@@ -30,7 +30,14 @@ const AudioElement: RadioElementType = ({ currentRadioUrl, audioRef }) => {
     }
   }, [audioRef, dispatch])
 
-  return <audio ref={audioRef} src={currentRadioUrl}></audio>
+  return (
+    <audio ref={audioRef} src={currentRadioUrl}>
+      <track default kind="captions" srcLang="en" src="default.vtt" />
+    </audio>
+  )
 }
+
+// Display the component name in react dev tools profiler
+AudioElement.displayName = 'AudioElement'
 
 export default AudioElement

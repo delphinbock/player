@@ -14,4 +14,7 @@ const App = () => {
   )
 }
 
+// Display the component name in react dev tools profiler
+App.displayName = 'App'
+
 export default App

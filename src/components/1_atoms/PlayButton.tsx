@@ -14,4 +14,7 @@ const PlayButton: PlayButtonType = memo(({ playing, onClick }) => (
   </button>
 ))
 
+// Display the component name in react dev tools profiler
+PlayButton.displayName = 'PlayButton'
+
 export default PlayButton

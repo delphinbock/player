@@ -5,8 +5,13 @@
   gap: 5px;
 
   &_radioName {
-    font-size: toRem(16);
+    font-size: toRem(20);
     font-weight: 600;
+    font-family:
+      'FjallaOne-Regular',
+      -apple-system,
+      sans-serif;
+    letter-spacing: 1px;
     margin: 0;
     color: $radioInfosNameColor;
     border: none;
@@ -22,6 +27,11 @@
     justify-content: left;
     align-items: center;
     color: $radioInfosColor;
-    font-size: toRem(16);
+    font-size: toRem(18);
+  }
+
+  svg {
+    width: 30px;
+    margin-right: 16px;
   }
 }

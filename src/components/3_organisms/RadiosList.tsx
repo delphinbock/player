@@ -13,7 +13,7 @@ import { RootState } from '@redux/store'
 
 const RadioList: RadioListType = memo(({ radioList, switchRadio, currentRadioUrl, counter }) => {
   // Local states
-  const [isListDisabled, setListDisabled] = useState(false)
+  const [isListDisabled, setIsListDisabled] = useState(false)
   const [lessCounter, setLessCounter] = useState(false)
 
   // Redux states
@@ -39,14 +39,14 @@ const RadioList: RadioListType = memo(({ radioList, switchRadio, currentRadioUrl
     (id: number) => {
       if (!isListDisabled) {
         // Disable the radios list
-        setListDisabled(true)
+        setIsListDisabled(true)
 
         // Switch radio
         switchRadio(id)
 
         // Re-able the radios list after 2 secondes (2 > 1)
         setTimeout(() => {
-          setListDisabled(false)
+          setIsListDisabled(false)
         }, 2000)
       }
     },
@@ -71,5 +71,8 @@ const RadioList: RadioListType = memo(({ radioList, switchRadio, currentRadioUrl
     </div>
   )
 })
+
+// Display the component name in react dev tools profiler
+RadioList.displayName = 'RadioList'
 
 export default RadioList

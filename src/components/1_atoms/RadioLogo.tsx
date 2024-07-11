@@ -55,4 +55,7 @@ const RadioLogo: RadioLogoType = ({ logo, imgPath }) => {
   )
 }
 
+// Display the component name in react dev tools profiler
+RadioLogo.displayName = 'RadioLogo'
+
 export default RadioLogo

@@ -13,6 +13,15 @@
   cursor: pointer;
   font-family: sans-serif;
 
+  .radioLogo {
+    border: initial;
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    box-shadow: 2px 3px 4px 0px rgba(0, 0, 0, 0.38);
+    margin-right: toRem(16);
+  }
+
   &:hover {
     background: $radioItemBgHoverColor;
     border: 1px solid $radioItemBorderHoverColor;

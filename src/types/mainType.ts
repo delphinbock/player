@@ -14,6 +14,8 @@ type RadioInfosProps = {
   name: string
   state: string
   city: string
+  flag: string
+  style: string[]
 }
 
 type RadioInfosType = FC<RadioInfosProps>
@@ -25,7 +27,10 @@ type RadioItemData = {
   flag: string
   state: string
   city: string
+  style: string[]
   url: string
+  logo: string
+  logo_square: string
 }
 
 type RadioItemProps = {
@@ -48,6 +53,7 @@ type RadioListData = {
   style: string[]
   url: string
   logo: string
+  logo_square: string
   flag: string
 }
 
