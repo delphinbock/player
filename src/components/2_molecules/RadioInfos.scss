@@ -5,7 +5,7 @@
   gap: 5px;
 
   &_radioName {
-    font-size: toRem(20);
+    font-size: toRem(16);
     font-weight: 600;
     font-family:
       'FjallaOne-Regular',
@@ -27,11 +27,12 @@
     justify-content: left;
     align-items: center;
     color: $radioInfosColor;
-    font-size: toRem(18);
+    font-size: toRem(16);
   }
 
   svg {
     width: 30px;
+    height: 20px;
     margin-right: 16px;
   }
 }

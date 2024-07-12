@@ -5,8 +5,10 @@
   margin: toRem(16);
   background: $playButtonBgColor;
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  direction: row;
+  flex-direction: row;
   font-size: toRem(40);
   min-height: 74px;
   min-width: 74px;
@@ -18,11 +20,11 @@
   }
 
   svg[data-icon='play'] {
-    padding: 0 0 0 1.1rem;
+    padding: 0 0 0 toRem(8)
   }
 
   svg[data-icon='stop'] {
-    padding: 0 0 0 0.95rem;
+    padding: 0;
   }
 
   &:hover {

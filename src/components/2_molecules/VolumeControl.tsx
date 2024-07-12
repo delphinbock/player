@@ -46,7 +46,7 @@ const VolumeControl: VolumeControlType = memo(({ volume, onChangeVolume }) => {
         onWheel={handleWheelChange}
         step="0.01"
       />
-      <FontAwesomeIcon icon={volume > 0 ? faVolumeHigh : faVolumeXmark} />
+      <FontAwesomeIcon className="controlVolume_volumeIcon" icon={volume > 0 ? faVolumeHigh : faVolumeXmark} />
     </div>
   )
 })

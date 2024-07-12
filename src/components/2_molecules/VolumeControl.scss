@@ -10,6 +10,11 @@
     display: block;
   }
 
+  &_volumeIcon {
+    width: toRem(20);
+    height: toRem(20);
+  }
+
   .controlVolume_volumeRange {
     margin-right: toRem(8);
     appearance: none;
