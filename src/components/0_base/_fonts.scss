@@ -1,0 +1,7 @@
+// Fonts
+$fontsPath: '/fonts/';
+
+// FjallaOne font
+$fontNameFileSpaceRanger: 'FjallaOne-Regular';
+$fontNameSpaceRanger: 'FjallaOne-Regular';
+@include declareFontFace($fontsPath, $fontNameFileSpaceRanger, $fontNameSpaceRanger);

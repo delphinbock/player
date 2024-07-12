@@ -7,8 +7,9 @@
     "city": "palm coast",
     "style": ["dance", "oldies", "80s"],
     "url": "http://s1.nexuscast.com:8135/;;audio.mp3",
-    "logo": "back-to-80.jpg",
-    "flag": "NZ-Q-USA.png"
+    "logo": "back_to_80",
+    "logo_square": "back_to_80_square",
+    "flag": "us"
   },
   {
     "id": 1,
@@ -18,19 +19,21 @@
     "city": "los angeles",
     "style": ["rock", "blue", "country"],
     "url": "https://c5.radioboss.fm:18224/stream",
-    "logo": "american-road.jpg",
-    "flag": "NZ-Q-USA.png"
+    "logo": "american_road",
+    "logo_square": "american_road_square",
+    "flag": "us"
   },
   {
     "id": 2,
-    "name": "lounge fm",
-    "country": "ukraine",
-    "state": "kiev oblast",
-    "city": "kiev",
-    "style": ["lounge"],
+    "name": "jazz radio lounge",
+    "country": "france",
+    "state": "Auvergne-Rhône-Alpes",
+    "city": "lyon",
+    "style": ["lounge", "jazz"],
     "url": "https://jazzlounge.ice.infomaniak.ch/jazzlounge-high.mp3",
-    "logo": "loungefm.jpg",
-    "flag": "Lxmv-ukraine.png"
+    "logo": "jazz_lounge_radio",
+    "logo_square": "jazz_lounge_radio_square",
+    "flag": "fr"
   },
   {
     "id": 3,
@@ -38,10 +41,11 @@
     "country": "canada",
     "state": "ontario",
     "city": "toronto",
-    "style": ["dance", "80s", "oldies"],
+    "style": ["dance", "oldies", "80s"],
     "url": "https://radio.streemlion.com:1235/stream",
-    "logo": "wave80.jpg",
-    "flag": "aBIS-canada.png"
+    "logo": "wave_80",
+    "logo_square": "wave_80_square",
+    "flag": "ca"
   },
   {
     "id": 4,
@@ -51,7 +55,8 @@
     "city": "los angeles",
     "style": ["jazz"],
     "url": "https://jking.cdnstream1.com/b22139_128mp3",
-    "logo": "101-smooth-jazz.jpg",
-    "flag": "NZ-Q-USA.png"
+    "logo": "101_smooth_jazz",
+    "logo_square": "101_smooth_jazz_square",
+    "flag": "us"
   }
 ]

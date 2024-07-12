@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="5" failures="0" errors="0" time="6.097">
+  <testsuite name="AudioElement" errors="0" failures="0" skipped="0" timestamp="2024-07-12T15:19:47" time="3.719" tests="3">
+    <testcase classname="AudioElement renders the audio element with the correct props" name="AudioElement renders the audio element with the correct props" time="0.052">
+    </testcase>
+    <testcase classname="AudioElement dispatches setLoading action on canplay event" name="AudioElement dispatches setLoading action on canplay event" time="0.009">
+    </testcase>
+    <testcase classname="AudioElement adds and removes canplay event listener on mount and unmount" name="AudioElement adds and removes canplay event listener on mount and unmount" time="0.005">
+    </testcase>
+  </testsuite>
+  <testsuite name="Counter" errors="0" failures="0" skipped="0" timestamp="2024-07-12T15:19:47" time="5.363" tests="2">
+    <testcase classname="Counter render countdown element" name="Counter render countdown element" time="0.05">
+    </testcase>
+    <testcase classname="Counter does not render countdown when timerInSecondes is 0" name="Counter does not render countdown when timerInSecondes is 0" time="0.014">
+    </testcase>
+  </testsuite>
+</testsuites>

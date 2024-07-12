@@ -1,0 +1,37 @@
+// Utiliser math.div
+@use 'sass:math';
+
+// Mixin to declare a font-face with various font sources
+@mixin declareFontFace($fontPath, $fontNameFile, $fontName) {
+  @font-face {
+    font-family: $fontName;
+    src:
+      url($fontPath + $fontNameFile + '.woff') format('woff'),
+      url($fontPath + $fontNameFile + '.eot'),
+      url($fontPath + $fontNameFile + '.eot?#iefix') format('embedded-opentype'),
+      url($fontPath + $fontNameFile + '.ttf') format('truetype'),
+      url($fontPath + $fontNameFile + '.svg') format('svg');
+    font-weight: 100 299;
+    font-style: normal;
+    font-display: swap;
+  }
+}
+
+// Pixel to rem
+@function toRem($value) {
+  $remValue: math.div($value, 16) + rem;
+  @return $remValue;
+}
+
+/// Generate responsive font-size value using clamp().
+/// @param {number} $size - The font size.
+/// @param {number} $scaler - The scaler value (15 = 15% smaller).
+/// @param {number} $optimal-size - The optimal font size.
+/// @return {string} - The responsive font-size value.
+@function responsiveFontSize($size, $scaler: 15, $optimal-size: map.get($settings, 'optimal-responsive-font-size')) {
+  @if $scaler < 0 or $scaler > 100 {
+    @error 'The $scaler value must be between 0 and 100.';
+  }
+
+  @return clamp(#{$size * math.div(100 - $scaler, 100)}, #{$optimal-size}, #{$size});
+}

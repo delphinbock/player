@@ -1,0 +1,28 @@
+.timer {
+  min-width: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: toRem(32);
+  color: $timerBorderColor;
+  background: $timerColorButton;
+  padding: toRem(13) toRem(8) toRem(13) toRem(8);
+  border: 1px solid $timerBorderColor;
+  border-radius: 10px;
+
+  &_hours,
+  &_minutes,
+  &_secondes {
+    display: block;
+    width: 30px;
+    margin-top: toRem(5);
+  }
+
+  &_separator {
+    display: block;
+    width: 15px;
+    margin: 0 toRem(3) 0 toRem(5);
+    text-align: center;
+  }
+}

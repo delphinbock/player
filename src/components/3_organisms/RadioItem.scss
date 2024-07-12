@@ -1,0 +1,34 @@
+.radioItemWrapper {
+  width: 100%;
+  margin: toRem(8) 0 toRem(8) 0;
+  background: $radioItemBgColor;
+  border-radius: 10px;
+  border: 1px solid $radioItemborderColor;
+  padding: toRem(8);
+  text-transform: capitalize;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  cursor: pointer;
+  font-family: sans-serif;
+
+  .radioLogo {
+    border: initial;
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    box-shadow: 2px 3px 4px 0px rgba(0, 0, 0, 0.38);
+    margin-right: toRem(16);
+  }
+
+  &:hover {
+    background: $radioItemBgHoverColor;
+    border: 1px solid $radioItemBorderHoverColor;
+
+    .radioItem_radioName,
+    .radioItem_radioInfos {
+      color: $radioItemHoverColor;
+    }
+  }
+}

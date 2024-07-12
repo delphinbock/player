@@ -1,0 +1,45 @@
+#player {
+  border: 1px solid $playerBorderColor;
+  width: 500px;
+  min-width: 500px;
+  min-height: 300px;
+  border-radius: 24px;
+  background: $playerBgColor;
+  position: relative;
+  box-shadow: 0 0 0 2px rgb(255 114 0);
+}
+
+.borderAnimationColor {
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    left: -3px;
+    top: -3px;
+    bottom: -3px;
+    right: -3px;
+    background: linear-gradient(
+      45deg,
+      $borderAnimationColorPurple,
+      $borderAnimationColorBlue,
+      $borderAnimationColorGreen,
+      $borderAnimationColorYellow,
+      $borderAnimationColorRed,
+      $borderAnimationColorPurple,
+      $borderAnimationColorBlue,
+      $borderAnimationColorGreen,
+      $borderAnimationColorYellow,
+      $borderAnimationColorRed
+    );
+    background-size: 400%;
+    width: calc(100% + 8px);
+    height: calc(100% + 8px);
+    z-index: -1;
+    animation: steam 20s linear infinite;
+    border-radius: 26px;
+  }
+
+  &:after {
+    filter: blur(30px);
+  }
+}

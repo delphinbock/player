@@ -1,0 +1,9 @@
+.radioList {
+  margin: toRem(16);
+  min-width: 182px;
+
+  &--off {
+    cursor: initial;
+    filter: grayscale(100%);
+  }
+}

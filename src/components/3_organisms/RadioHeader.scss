@@ -1,0 +1,9 @@
+.radioHeader {
+  &_controllers {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 toRem(16);
+    align-items: center;
+  }
+}
