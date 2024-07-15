@@ -1,4 +1,7 @@
 // React
+import { WheelEvent } from 'react'
+
+// React
 import { ChangeEvent, memo, useCallback } from 'react'
 
 // Font icons
@@ -20,11 +23,13 @@ const VolumeControl: VolumeControlType = memo(({ volume, onChangeVolume }) => {
 
   // Volume on wheel action
   const handleWheelChange = useCallback(
-    (e: React.WheelEvent<HTMLInputElement>) => {
+    (e: WheelEvent<HTMLInputElement>) => {
       if (e.deltaY < 0) {
-        volume = Math.min(1, volume + 0.08) // Increase volume, limit to maximum of 1
+        // Increase volume, limit to maximum of 1
+        volume = Math.min(1, volume + 0.1)
       } else {
-        volume = Math.max(0, volume - 0.08) // Decrease volume, limit to minimum of 0
+        // Decrease volume, limit to minimum of 0
+        volume = Math.max(0, volume - 0.1)
       }
 
       // Update volume with onChangeVolume callback
@@ -44,7 +49,7 @@ const VolumeControl: VolumeControlType = memo(({ volume, onChangeVolume }) => {
         value={volume}
         onChange={handleVolumeChange}
         onWheel={handleWheelChange}
-        step="0.01"
+        step="0.1"
       />
       <FontAwesomeIcon className="controlVolume_volumeIcon" icon={volume > 0 ? faVolumeHigh : faVolumeXmark} />
     </div>
