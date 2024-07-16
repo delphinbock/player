@@ -12,6 +12,6 @@
 
 
 
-You can report issues related to the game: [issues](https://github.com/delphinbock/player/issues)
+You can report issues related to the player: [issues](https://github.com/delphinbock/player/issues)
 
 ![Image demo player](demo.png)
