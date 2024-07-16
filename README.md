@@ -2,6 +2,7 @@
 
 [![GNU License](https://img.shields.io/badge/license-GNU-blue.svg?style=style=flat-square)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Version](https://img.shields.io/badge/version-1.0.0-green?style=flat?id=js&r=r&ts=1683906897&type=6e&v=2.0.0&x2=0)](https://github.com/delphinbock/spock)
+[![React](https://img.shields.io/badge/react-18.0.0-blue.svg?logo=react&style=style=flat-square)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Design](https://img.shields.io/badge/design_system-atomic_&_BEM-orange?style=flat?id=js&r=r&ts=1683906897&type=6e&v=2.0.0&x2=0)](https://github.com/delphinbock/spock)
 [![NPM version](https://img.shields.io/badge/npm-^10.7.0-red.svg?logo=npm&style=style=flat-square)](https://www.npmjs.com/)
 [![TS version](https://img.shields.io/badge/typescript-^5.4.0-blue.svg?logo=typescript&style=style=flat-square)](https://www.typescriptlang.org/)
