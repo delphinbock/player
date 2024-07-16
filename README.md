@@ -13,4 +13,4 @@
 
 You can report issues related to the game: [issues](https://github.com/delphinbock/player/issues)
 
-![Image demo game](thumbnail.jpg)
+![Image demo player](demo.png)
