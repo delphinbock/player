@@ -10,12 +10,27 @@ html {
   }
 
   body {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: toRem(16);
-    align-items: center;
     background: $bodyBgColor;
+
+    @include breakpoint(md, max) {
+      margin: 0;
+      padding: 0;
+    }
+
+    #root {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin: toRem(16);
+      align-items: center;
+
+      @include breakpoint(md, max) {
+        display: initial;
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+      }
+    }
   }
 
   .dark {
