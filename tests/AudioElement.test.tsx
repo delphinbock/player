@@ -48,7 +48,7 @@ describe('AudioElement', () => {
     render(<AudioElement currentRadioUrl="test-url" audioRef={audioRef} />)
 
     // Get the audio element
-    const audio = document.getElementById('audio-element') as HTMLAudioElement
+    const audio = document.getElementById('audioElement') as HTMLAudioElement
 
     // Check that audio element is present in document
     expect(audio).toBeInTheDocument()

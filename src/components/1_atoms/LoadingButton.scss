@@ -1,42 +1,38 @@
-// Dot pulse
 .spinner {
   border-radius: 100%;
-  margin: toRem(16);
+  margin: 0;
+  padding: 0;
   border: 1px solid $playLoadingButtonColor;
   background: $playLoadingButtonBgColor;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  min-height: 74px;
-  min-width: 74px;
+  flex-direction: row;
+  font-size: toRem(40);
+  height: 76px;
+  width: 76px;
 
-  &_bounce1 {
-    width: 18px;
-    height: 18px;
+  &__bounce {
+    display: block;
+    width: 16px;
+    height: 16px;
     background: $playLoadingButtonColor;
     border-radius: 100%;
     display: inline-block;
     animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-    animation-delay: -0.32s;
-  }
+    margin: 0;
+    padding: 0;
 
-  &_bounce2 {
-    width: 18px;
-    height: 18px;
-    background: $playLoadingButtonColor;
-    border-radius: 100%;
-    display: inline-block;
-    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-    animation-delay: -0.16s;
-  }
+    &--1 {
+      animation-delay: -0.32s;
+    }
 
-  &_bounce3 {
-    width: 18px;
-    height: 18px;
-    background: $playLoadingButtonColor;
-    border-radius: 100%;
-    display: inline-block;
-    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    &--2 {
+      animation-delay: -0.16s;
+    }
+
+    &--3 {
+      animation-delay: 0s;
+    }
   }
 }

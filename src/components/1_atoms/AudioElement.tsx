@@ -31,7 +31,7 @@ const AudioElement: RadioElementType = ({ currentRadioUrl, audioRef }) => {
   }, [audioRef, dispatch])
 
   return (
-    <audio id="audio-element" ref={audioRef} src={currentRadioUrl}>
+    <audio id="audioElement" ref={audioRef} src={currentRadioUrl}>
       <track default kind="captions" srcLang="en" src="default.vtt" />
     </audio>
   )

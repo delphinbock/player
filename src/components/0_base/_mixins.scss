@@ -35,3 +35,32 @@
 
   @return clamp(#{$size * math.div(100 - $scaler, 100)}, #{$optimal-size}, #{$size});
 }
+
+// Mixin to handle responsive breakpoints
+@mixin breakpoint($breakpoint, $direction: min) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-values: map-get($breakpoints, $breakpoint);
+    $breakpoint-min: map-get($breakpoint-values, min);
+    $breakpoint-max: map-get($breakpoint-values, max);
+
+    @if $direction == min and $breakpoint-min != null {
+      @media (min-width: $breakpoint-min) {
+        @content;
+      }
+    } @else if $direction == max and $breakpoint-max != null {
+      @media (max-width: $breakpoint-max) {
+        @content;
+      }
+    }
+  } @else {
+    @if $direction == min {
+      @media (min-width: $breakpoint) {
+        @content;
+      }
+    } @else {
+      @media (max-width: $breakpoint) {
+        @content;
+      }
+    }
+  }
+}

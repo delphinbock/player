@@ -1,12 +1,21 @@
 #player {
   border: 1px solid $playerBorderColor;
-  width: 500px;
-  min-width: 500px;
-  min-height: 300px;
+  max-width: 500px;
   border-radius: 24px;
   background: $playerBgColor;
   position: relative;
   box-shadow: 0 0 0 2px rgb(255 114 0);
+
+  @include breakpoint(sm, max) {
+    min-width: 350px;
+  }
+
+  @include breakpoint(md, max) {
+    border-radius: initial;
+    max-width: 100%;
+    border: none;
+    box-shadow: none;
+  }
 }
 
 .borderAnimationColor {
@@ -33,7 +42,6 @@
     );
     background-size: 400%;
     width: calc(100% + 8px);
-    height: calc(100% + 8px);
     z-index: -1;
     animation: steam 20s linear infinite;
     border-radius: 26px;
@@ -41,5 +49,19 @@
 
   &:after {
     filter: blur(30px);
+  }
+
+  @include breakpoint(sm, max) {
+    &:before,
+    &:after {
+      display: none;
+    }
+  }
+
+  @include breakpoint(md, max) {
+    &:before,
+    &:after {
+      display: none;
+    }
   }
 }

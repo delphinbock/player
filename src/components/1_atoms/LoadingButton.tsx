@@ -5,9 +5,9 @@ import { FC, memo } from 'react'
 const LoadingButton: FC = memo(() => {
   return (
     <div className="spinner">
-      <div className="spinner_bounce1"></div>
-      <div className="spinner_bounce2"></div>
-      <div className="spinner_bounce3"></div>
+      <span className="spinner__bounce spinner__bounce--1"></span>
+      <span className="spinner__bounce spinner__bounce--2"></span>
+      <span className="spinner__bounce spinner__bounce--3"></span>
     </div>
   )
 })
